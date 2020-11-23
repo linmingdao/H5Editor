@@ -8,7 +8,6 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 
-// label, field, type(antd对应的基础表单组件 和 自定义的业务组件)，必填，palceholder，value
 const App: React.FC = () => {
   return (
     <div className="App">
