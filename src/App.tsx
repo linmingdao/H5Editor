@@ -27,13 +27,6 @@ const App: React.FC = () => {
                   placeholder: "请选择数据源",
                 },
               },
-              // {
-              //   label: "App下载地址",
-              //   name: "AppDownloadAddressInput",
-              //   props: {
-              //     placeholder: "哈哈我额",
-              //   },
-              // },
             ],
           }}
           buildingTemplateGroupList={[
