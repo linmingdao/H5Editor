@@ -22,6 +22,7 @@ export type BuildingTemplateGroupList = BuildingTemplateGroup[];
 // 统一的模板组件分组
 export interface UniformTmplGroup {
   icon?: any;
+  loader?: (name: string) => any;
   group: string;
   title: string;
   components: any[];
@@ -42,8 +43,7 @@ export type SelectedCallback = (selectedIndex: number) => void;
 export type NoSelectedCallback = () => void;
 
 export interface H5EditorContext {
-  brickTemplate: BrickTemplate;
-  buildingTemplateGroupList: BuildingTemplateGroupList;
+  uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
   currentIndex: number;
   currentProps: any;

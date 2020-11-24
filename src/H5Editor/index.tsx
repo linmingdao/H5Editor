@@ -4,13 +4,11 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import Editor from "./Editor";
 import { H5EditorProps, H5EditorContext, StageItem } from "./types";
+import { getUniformTmplGroupList } from "./helper";
 import "./index.css";
 
 export const EditorContext = React.createContext<H5EditorContext>({
-  brickTemplate: {
-    loader: (name: string) => [],
-  },
-  buildingTemplateGroupList: [],
+  uniformTmplGroupList: [],
   stageItemList: [],
   currentIndex: -1,
   currentProps: {},
@@ -22,8 +20,10 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [currentProps, setCurrentProps] = useState<any>(null);
   const passedContext: H5EditorContext = {
-    brickTemplate,
-    buildingTemplateGroupList,
+    uniformTmplGroupList: getUniformTmplGroupList(
+      brickTemplate,
+      buildingTemplateGroupList
+    ),
     stageItemList,
     currentIndex,
     currentProps,

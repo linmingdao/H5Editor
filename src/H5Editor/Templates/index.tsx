@@ -4,24 +4,16 @@ import { Menu } from "antd";
 import List from "./List";
 import Item from "./Item";
 import { EditorContext } from "../index";
-import { UniformTmplGroupList } from "../types";
-import { getUniformTmplGroupList } from "../helper";
 
 const Templates: React.FC = () => {
-  const { brickTemplate, buildingTemplateGroupList } = useContext(
-    EditorContext
-  );
-  const tmplGroupList: UniformTmplGroupList = getUniformTmplGroupList(
-    brickTemplate,
-    buildingTemplateGroupList
-  );
+  const { uniformTmplGroupList } = useContext(EditorContext);
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
   const [currentComponents, setCurrentComponents] = useState(
-    tmplGroupList[0]["components"]
+    uniformTmplGroupList[0]["components"]
   );
   const handleSelect = (item: any) => {
     setCurrentGroupIndex(item.key);
-    setCurrentComponents(tmplGroupList[item.key]["components"]);
+    setCurrentComponents(uniformTmplGroupList[item.key]["components"]);
   };
 
   return (
@@ -34,7 +26,7 @@ const Templates: React.FC = () => {
         style={{ height: "100%", width: 44, borderColor: "#dcdcdc" }}
         defaultSelectedKeys={["0"]}
       >
-        {tmplGroupList.map((item, index) => (
+        {uniformTmplGroupList.map((item, index) => (
           <Menu.Item
             key={index}
             icon={item.icon ? item.icon : <SettingOutlined translate="" />}
@@ -42,7 +34,9 @@ const Templates: React.FC = () => {
         ))}
       </Menu>
       <div className="category">
-        <div className="title">{tmplGroupList[currentGroupIndex]["title"]}</div>
+        <div className="title">
+          {uniformTmplGroupList[currentGroupIndex]["title"]}
+        </div>
         <List>
           {currentComponents.map((item: any) => (
             <Item key={item.name} config={item} />

@@ -27,8 +27,8 @@ type DynamicType = {
 };
 
 const DynamicEngine = memo((props: DynamicType) => {
-  const { brickTemplate } = useContext(EditorContext);
-  const { loader } = brickTemplate;
+  const { uniformTmplGroupList } = useContext(EditorContext);
+  const loader = uniformTmplGroupList[0].loader;
   const { componentType, componentName } = props;
   const Dynamic = useMemo(() => {
     return (DynamicFunc(loader, componentType, componentName) as unknown) as FC<
