@@ -85,6 +85,8 @@ export type NoSelectedCallback = () => void;
 export interface H5EditorContext {
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
+  collapse: boolean;
+  setCollapse: (collapse: boolean) => void;
   selectedStageItemIndex: number;
   handlePropsChange?: (
     changedValues: any,

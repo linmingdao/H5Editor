@@ -10,12 +10,15 @@ import "./index.css";
 export const EditorContext = React.createContext<H5EditorContext>({
   uniformTmplGroupList: [],
   stageItemList: [],
+  collapse: false,
+  setCollapse: () => false,
   selectedStageItemIndex: -1,
 });
 
 const H5Editor: React.FC<H5EditorProps> = (props) => {
   const { brickTemplate, buildingTemplateGroupList } = props;
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
+  const [collapse, setCollapse] = useState<boolean>(false);
   const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
     -1
   );
@@ -25,6 +28,8 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       buildingTemplateGroupList
     ),
     stageItemList,
+    collapse,
+    setCollapse,
     selectedStageItemIndex,
     handlePropsChange(
       changedValues: any,
@@ -49,6 +54,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     },
     handleSelect(selectedIndex: number) {
       setSelectedStageItemIndex(selectedIndex);
+      setCollapse(selectedIndex >= 0);
     },
     handleDrop(item) {
       setStageItemList([...stageItemList, { ...item, id: nanoid() }]);
