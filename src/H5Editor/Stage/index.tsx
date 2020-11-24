@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { EditorContext } from "../index";
 import SortableItem from "./SortableItem";
-import DynamicEngine from "../DynamicEngine";
+import BrickDynamicEngine from "../BrickDynamicEngine";
 
 const Stage: React.FC = () => {
   const {
@@ -51,13 +51,11 @@ const Stage: React.FC = () => {
         moveFormItem={moveFormItem}
         onClick={() => handleSelect && handleSelect(index)}
       >
-        <DynamicEngine
-          componentType={item.type}
-          componentName={item.name}
+        <BrickDynamicEngine
           mode="stage"
+          componentName={item.name}
+          componentProps={item.props}
           onValuesChange={handleValuesChange}
-          {...item.props}
-          {...currentProps}
         />
       </SortableItem>
     );

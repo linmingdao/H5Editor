@@ -1,7 +1,7 @@
 import React, { CSSProperties, useContext } from "react";
 import classnames from "classnames";
 import { EditorContext } from "../index";
-import DynamicEngine from "../DynamicEngine";
+import BrickDynamicEngine from "../BrickDynamicEngine";
 
 interface IAttributes {
   collapse: boolean;
@@ -26,13 +26,11 @@ const Attributes: React.FC<IAttributes> = (props) => {
 
     const config = stageItemList[selectedStageItemIndex];
     return config ? (
-      <div>
-        <DynamicEngine
-          key={selectedStageItemIndex}
-          componentType="Bricks"
-          componentName={config.name}
+      <div key={selectedStageItemIndex}>
+        <BrickDynamicEngine
           mode="attr"
-          {...currentProps}
+          componentName={config.name}
+          componentProps={currentProps}
           onValuesChange={handleValuesChange}
         />
       </div>

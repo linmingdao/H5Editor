@@ -17,7 +17,6 @@ export const EditorContext = React.createContext<H5EditorContext>({
 const H5Editor: React.FC<H5EditorProps> = (props) => {
   const { brickTemplate, buildingTemplateGroupList } = props;
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
-  // selectedStageItemIndex：标识 Stage 中被选中 Item 的下标， 方便操作 Attributes 和 设置该 Item 的值
   const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
     -1
   );
