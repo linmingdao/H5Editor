@@ -13,18 +13,20 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = (props) => {
-  const { label } = props.config;
+  const { config } = props;
+  const { label } = config;
   const { handleDrop } = useContext(EditorContext);
 
   const [{ isDragging }, drag] = useDrag({
-    item: { label, type: "TemplateItem", config: props.config },
+    item: { type: "TemplateItem", config },
     end: (
-      item: { label: string; type: string; config: any } | undefined,
+      item: { type: string; config: any } | undefined,
       monitor: DragSourceMonitor
     ) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        handleDrop && handleDrop({ ...item.config });
+        handleDrop &&
+          handleDrop({ ...JSON.parse(JSON.stringify(item.config)) });
       }
     },
     collect: (monitor) => ({

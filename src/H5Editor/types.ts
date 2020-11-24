@@ -42,6 +42,7 @@ export interface UniformBrickTmplProps {
 }
 
 export interface UniformBrickTmpl {
+  id: string;
   type: "Bricks";
   label: string;
   name: string;
@@ -49,14 +50,18 @@ export interface UniformBrickTmpl {
 }
 
 export interface UniformBuildingTmpl {
+  id: string;
   type: "Buildings";
   label: string;
   composes: UniformBrickTmpl[];
 }
 
+// TODO:处理这里的类型检查
+// export type UniformTmpl = UniformBrickTmpl | UniformBuildingTmpl;
+
 // 统一的模板组件分组
 export interface UniformTmplGroup {
-  icon?: any;
+  icon?: React.ReactNode;
   // 非 Bricks 组件无 loader
   loader?: Loader;
   title: string;
