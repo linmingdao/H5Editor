@@ -1,29 +1,64 @@
+import React from "react";
+
+export type Loader = (name: string) => any;
+
+export interface ObjProps {
+  [key: string]: any;
+}
+
+// 传入 H5Editor 的 props 结构定义
+
 export interface BrickComponent {
   label: string;
   name: string;
+  loader?: Loader;
+  props?: ObjProps;
 }
 
 export interface BrickTemplate {
-  icon?: any;
-  loader: (name: string) => any;
+  icon?: React.ReactNode;
+  loader: Loader;
   getComponents?: () => BrickComponent[];
 }
 
+export interface BuildingComponent {
+  label: string;
+  composes: BrickComponent[];
+}
+
 export interface BuildingTemplateGroup {
-  icon?: any;
-  group: string;
+  icon?: React.ReactNode;
   title: string;
-  getComponents?: () => any[];
+  getComponents?: () => BuildingComponent[];
   updateComponents?: () => void;
 }
 
 export type BuildingTemplateGroupList = BuildingTemplateGroup[];
 
+// 基础组件 和 建筑组件 统一的数据结构
+
+export interface UniformBrickTmplProps {
+  [key: string]: any;
+}
+
+export interface UniformBrickTmpl {
+  type: "Bricks";
+  label: string;
+  name: string;
+  props: UniformBrickTmplProps;
+}
+
+export interface UniformBuildingTmpl {
+  type: "Buildings";
+  label: string;
+  composes: UniformBrickTmpl[];
+}
+
 // 统一的模板组件分组
 export interface UniformTmplGroup {
   icon?: any;
-  loader?: (name: string) => any;
-  group: string;
+  // 非 Bricks 组件无 loader
+  loader?: Loader;
   title: string;
   components: any[];
 }
@@ -45,7 +80,7 @@ export type NoSelectedCallback = () => void;
 export interface H5EditorContext {
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
-  currentIndex: number;
+  selectedStageItemIndex: number;
   currentProps: any;
   handlePropsChange?: (
     changedValues: any,

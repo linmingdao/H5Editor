@@ -10,14 +10,17 @@ import "./index.css";
 export const EditorContext = React.createContext<H5EditorContext>({
   uniformTmplGroupList: [],
   stageItemList: [],
-  currentIndex: -1,
+  selectedStageItemIndex: -1,
   currentProps: {},
 });
 
 const H5Editor: React.FC<H5EditorProps> = (props) => {
   const { brickTemplate, buildingTemplateGroupList } = props;
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
-  const [currentIndex, setCurrentIndex] = useState<number>(-1);
+  // selectedStageItemIndex：标识 Stage 中被选中 Item 的下标， 方便操作 Attributes 和 设置该 Item 的值
+  const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
+    -1
+  );
   const [currentProps, setCurrentProps] = useState<any>(null);
   const passedContext: H5EditorContext = {
     uniformTmplGroupList: getUniformTmplGroupList(
@@ -25,7 +28,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       buildingTemplateGroupList
     ),
     stageItemList,
-    currentIndex,
+    selectedStageItemIndex,
     currentProps,
     handlePropsChange(
       changedValues: any,
@@ -54,7 +57,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     },
     handleSelect(selectedIndex: number) {
       setCurrentProps(stageItemList[selectedIndex].props);
-      setCurrentIndex(selectedIndex);
+      setSelectedStageItemIndex(selectedIndex);
     },
     handleDrop(item) {
       setStageItemList([...stageItemList, { ...item, id: nanoid() }]);

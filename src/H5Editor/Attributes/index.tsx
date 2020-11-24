@@ -12,7 +12,7 @@ interface IAttributes {
 const Attributes: React.FC<IAttributes> = (props) => {
   const className = classnames("attributes", { collapse: !props.collapse });
   const {
-    currentIndex,
+    selectedStageItemIndex,
     currentProps,
     stageItemList,
     handlePropsChange,
@@ -21,14 +21,14 @@ const Attributes: React.FC<IAttributes> = (props) => {
   function renderAttr() {
     function handleValuesChange(changedValues: any, allValues: any) {
       handlePropsChange &&
-        handlePropsChange(changedValues, allValues, currentIndex);
+        handlePropsChange(changedValues, allValues, selectedStageItemIndex);
     }
 
-    const config = stageItemList[currentIndex];
+    const config = stageItemList[selectedStageItemIndex];
     return config ? (
       <div>
         <DynamicEngine
-          key={currentIndex}
+          key={selectedStageItemIndex}
           componentType="Bricks"
           componentName={config.name}
           mode="attr"

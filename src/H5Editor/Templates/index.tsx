@@ -1,9 +1,20 @@
 import React, { useContext, useState } from "react";
 import { SettingOutlined } from "@ant-design/icons";
+import { EditorContext } from "../index";
 import { Menu } from "antd";
 import List from "./List";
 import Item from "./Item";
-import { EditorContext } from "../index";
+
+interface MenuInfo {
+  key: React.Key;
+  keyPath: React.Key[];
+  item: React.ReactInstance;
+  domEvent: React.MouseEvent<HTMLElement>;
+}
+
+interface SelectInfo extends MenuInfo {
+  selectedKeys?: React.Key[];
+}
 
 const Templates: React.FC = () => {
   const { uniformTmplGroupList } = useContext(EditorContext);
@@ -11,9 +22,11 @@ const Templates: React.FC = () => {
   const [currentComponents, setCurrentComponents] = useState(
     uniformTmplGroupList[0]["components"]
   );
-  const handleSelect = (item: any) => {
-    setCurrentGroupIndex(item.key);
-    setCurrentComponents(uniformTmplGroupList[item.key]["components"]);
+
+  const handleSelect = (item: SelectInfo) => {
+    const index = Number(item.key);
+    setCurrentGroupIndex(index);
+    setCurrentComponents(uniformTmplGroupList[index]["components"]);
   };
 
   return (
@@ -39,7 +52,7 @@ const Templates: React.FC = () => {
         </div>
         <List>
           {currentComponents.map((item: any) => (
-            <Item key={item.name} config={item} />
+            <Item key={item.id} config={item} />
           ))}
         </List>
       </div>

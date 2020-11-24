@@ -23,6 +23,7 @@ const App: React.FC = () => {
                 props: {
                   label: "数据源",
                   name: "source",
+                  value: "",
                   placeholder: "请选择数据源",
                 },
               },
@@ -31,23 +32,56 @@ const App: React.FC = () => {
           buildingTemplateGroupList={[
             {
               icon: <AppstoreOutlined translate="" />,
-              group: "Templates",
               title: "模板组件",
               getComponents: () => [
                 {
-                  id: "232nobi13o1234n",
                   label: "用户登录",
                   composes: [
-                    { type: "Bricks:UserName" },
-                    { type: "Bricks:UserPassword" },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserName",
+                      props: {
+                        label: "数据源",
+                        name: "source",
+                        value: "",
+                        placeholder: "请选择数据源",
+                      },
+                    },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserPassword",
+                      props: {
+                        label: "数据源",
+                        name: "source",
+                        value: "",
+                        placeholder: "请选择数据源",
+                      },
+                    },
                   ],
                 },
                 {
-                  id: "839sjwwl2ll24nn",
                   label: "确认密码",
                   composes: [
-                    { type: "Bricks:UserPassword" },
-                    { type: "Bricks:UserPassword" },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserPassword",
+                      props: {
+                        label: "输入密码",
+                        name: "password1",
+                        value: "",
+                        placeholder: "请输入",
+                      },
+                    },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserPassword",
+                      props: {
+                        label: "确认密码",
+                        name: "password2",
+                        value: "",
+                        placeholder: "再次输入",
+                      },
+                    },
                   ],
                 },
               ],
@@ -55,24 +89,56 @@ const App: React.FC = () => {
             },
             {
               icon: <PieChartOutlined translate="" />,
-              group: "Businesses",
               title: "业务组件",
               getComponents: () => [
                 {
-                  id: "ew892jlasdl2229jj2",
                   label: "设置下载地址",
                   composes: [
-                    { type: "Bricks:AppDownloadAddressInput" },
-                    { type: "Templates:232nobi13o1234n" },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserName",
+                      props: {
+                        label: "数据源",
+                        name: "source",
+                        value: "",
+                        placeholder: "请选择数据源",
+                      },
+                    },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserPassword",
+                      props: {
+                        label: "数据源",
+                        name: "source",
+                        value: "",
+                        placeholder: "请选择数据源",
+                      },
+                    },
                   ],
                 },
                 {
-                  id: "fakks2325landsawl22",
                   label: "设置Apollo数据源",
                   composes: [
-                    { type: "Bricks:MysqlDataSourceSelect" },
-                    { type: "Templates:232nobi13o1234n" },
-                    { type: "Businesses:ew892jlasdl2229jj2" },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserName",
+                      props: {
+                        label: "数据源",
+                        name: "source",
+                        value: "",
+                        placeholder: "请选择数据源",
+                      },
+                    },
+                    {
+                      label: "Mysql数据源",
+                      name: "UserPassword",
+                      props: {
+                        label: "数据源",
+                        name: "source",
+                        value: "",
+                        placeholder: "请选择数据源",
+                      },
+                    },
                   ],
                 },
               ],
