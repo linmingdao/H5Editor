@@ -1,6 +1,8 @@
-import React, { HTMLAttributes, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
+import classnames from "classnames";
+import { EditorContext } from "../index";
 
 export interface ISortableItemProps {
   id: any;
@@ -70,9 +72,14 @@ const SortableItem: React.FC<ISortableItemProps> = ({
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
 
+  const { selectedStageItemIndex } = useContext(EditorContext);
+  const className = classnames("form-wrapper", {
+    selected: selectedStageItemIndex === index,
+  });
+
   return (
     <div
-      className="form-wrapper"
+      className={className}
       ref={ref}
       style={{ cursor: "move", opacity }}
       onClick={() => onClick && onClick()}
