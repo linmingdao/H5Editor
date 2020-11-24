@@ -56,6 +56,7 @@ const TitleInput: React.FC<TitleInputProps> = ({
           </Form.Item>
           <Form.Item label="background" name="backgroundColor">
             <Select style={{ width: "100%" }} placeholder={placeholder}>
+              <Option value="#fff">white</Option>
               <Option value="#40a9ff">blue</Option>
               <Option value="yellow">yellow</Option>
               <Option value="green">green</Option>
@@ -74,7 +75,7 @@ const TitleInput: React.FC<TitleInputProps> = ({
 TitleInput.defaultProps = {
   label: "标题",
   name: "title",
-  backgroundColor: "#40a9ff",
+  backgroundColor: "#fff",
   placeholder: "请输入",
   mode: "stage",
 };

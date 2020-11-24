@@ -35,9 +35,11 @@ const Item: React.FC<ItemProps> = (props) => {
   });
 
   return (
-    <div ref={drag} className="item" style={{ opacity: isDragging ? 0.3 : 1 }}>
-      <div className="preview"></div>
-      <div className="name">{label}</div>
+    <div className="item" style={{ opacity: isDragging ? 0.3 : 1 }}>
+      <div ref={drag} className="item-content">
+        <div className="preview"></div>
+        <div className="name">{label}</div>
+      </div>
     </div>
   );
 };
