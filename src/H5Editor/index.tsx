@@ -16,10 +16,8 @@ export const EditorContext = React.createContext<H5EditorContext>({
   currentProps: {},
 });
 
-const H5Editor: React.FC<H5EditorProps> = ({
-  brickTemplate,
-  buildingTemplateGroupList,
-}) => {
+const H5Editor: React.FC<H5EditorProps> = (props) => {
+  const { brickTemplate, buildingTemplateGroupList } = props;
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [currentProps, setCurrentProps] = useState<any>(null);
