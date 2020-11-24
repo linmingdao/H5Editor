@@ -13,7 +13,6 @@ const Attributes: React.FC<IAttributes> = (props) => {
   const className = classnames("attributes", { collapse: !props.collapse });
   const {
     selectedStageItemIndex,
-    currentProps,
     stageItemList,
     handlePropsChange,
   } = useContext(EditorContext);
@@ -26,11 +25,12 @@ const Attributes: React.FC<IAttributes> = (props) => {
 
     const config = stageItemList[selectedStageItemIndex];
     return config ? (
-      <div key={selectedStageItemIndex}>
+      <div>
         <BrickDynamicEngine
+          key={selectedStageItemIndex}
           mode="attr"
           componentName={config.name}
-          componentProps={currentProps}
+          componentProps={config.props}
           onValuesChange={handleValuesChange}
         />
       </div>

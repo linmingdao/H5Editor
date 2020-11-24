@@ -2,11 +2,6 @@ import React from "react";
 import { Select, Form, Input } from "antd";
 const { Option } = Select;
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
-
 interface MysqlDataSourceSelectProps {
   label?: string;
   name?: string;
@@ -29,7 +24,10 @@ const MysqlDataSourceSelect: React.FC<MysqlDataSourceSelectProps> = ({
 
     if (mode === "stage") {
       return (
-        <Form {...layout} onValuesChange={handleValuesChange}>
+        <Form
+          {...{ labelCol: { span: 6 }, wrapperCol: { span: 18 } }}
+          onValuesChange={handleValuesChange}
+        >
           <Form.Item label={label} name={name}>
             <Select style={{ width: "100%" }} placeholder={placeholder}>
               <Option value="jack">Jack</Option>
@@ -41,11 +39,19 @@ const MysqlDataSourceSelect: React.FC<MysqlDataSourceSelectProps> = ({
       );
     } else if (mode === "attr") {
       return (
-        <Form {...layout} labelAlign="left" onValuesChange={handleValuesChange}>
-          <Form.Item label="placeholder" name="placeholder">
+        <Form
+          {...{ labelCol: { span: 12 }, wrapperCol: { span: 12 } }}
+          labelAlign="left"
+          initialValues={{
+            label,
+            placeholder,
+          }}
+          onValuesChange={handleValuesChange}
+        >
+          <Form.Item label="label" name="label">
             <Input placeholder="请输入" />
           </Form.Item>
-          <Form.Item label="label" name="label">
+          <Form.Item label="placeholder" name="placeholder">
             <Input placeholder="请输入" />
           </Form.Item>
         </Form>

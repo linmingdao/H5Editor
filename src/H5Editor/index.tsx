@@ -11,7 +11,6 @@ export const EditorContext = React.createContext<H5EditorContext>({
   uniformTmplGroupList: [],
   stageItemList: [],
   selectedStageItemIndex: -1,
-  currentProps: {},
 });
 
 const H5Editor: React.FC<H5EditorProps> = (props) => {
@@ -20,7 +19,6 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
   const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
     -1
   );
-  const [currentProps, setCurrentProps] = useState<any>(null);
   const passedContext: H5EditorContext = {
     uniformTmplGroupList: getUniformTmplGroupList(
       brickTemplate,
@@ -28,16 +26,11 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     ),
     stageItemList,
     selectedStageItemIndex,
-    currentProps,
     handlePropsChange(
       changedValues: any,
       allValues: any,
       selectedIndex: number
     ) {
-      setCurrentProps({
-        ...currentProps,
-        ...allValues,
-      });
       setStageItemList(
         stageItemList.map((item, index) => {
           if (index === selectedIndex) {
@@ -45,7 +38,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
               ...item,
               props: {
                 ...item["props"],
-                ...allValues,
+                ...changedValues,
               },
             };
           } else {
@@ -55,7 +48,6 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       );
     },
     handleSelect(selectedIndex: number) {
-      setCurrentProps(stageItemList[selectedIndex].props);
       setSelectedStageItemIndex(selectedIndex);
     },
     handleDrop(item) {

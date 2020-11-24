@@ -86,7 +86,6 @@ export interface H5EditorContext {
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
   selectedStageItemIndex: number;
-  currentProps: any;
   handlePropsChange?: (
     changedValues: any,
     allValues: any,

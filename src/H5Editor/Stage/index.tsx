@@ -5,12 +5,9 @@ import SortableItem from "./SortableItem";
 import BrickDynamicEngine from "../BrickDynamicEngine";
 
 const Stage: React.FC = () => {
-  const {
-    stageItemList,
-    currentProps,
-    handleSelect,
-    handlePropsChange,
-  } = useContext(EditorContext);
+  const { stageItemList, handleSelect, handlePropsChange } = useContext(
+    EditorContext
+  );
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "TemplateItem",
     drop: () => ({ name: "LayoutEditor" }),
