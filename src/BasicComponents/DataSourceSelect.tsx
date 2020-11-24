@@ -30,9 +30,9 @@ const MysqlDataSourceSelect: React.FC<MysqlDataSourceSelectProps> = ({
         >
           <Form.Item label={label} name={name}>
             <Select style={{ width: "100%" }} placeholder={placeholder}>
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="Yiminghe">yiminghe</Option>
+              <Option value="source1">source 1</Option>
+              <Option value="source2">source 2</Option>
+              <Option value="source3">source 3</Option>
             </Select>
           </Form.Item>
         </Form>
