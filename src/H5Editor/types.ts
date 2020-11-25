@@ -108,7 +108,7 @@ export interface H5EditorContext {
   handleSelect?: SelectedCallback;
   handleSort?: (stageItemList: StageItem[]) => void;
   handleCopy?: SelectedCallback;
-  handleRemove?: SelectedCallback;
+  handleRemove?: (id: string) => void;
   handleReset?: NoSelectedCallback;
   handleUndo?: NoSelectedCallback;
   handleRedo?: NoSelectedCallback;

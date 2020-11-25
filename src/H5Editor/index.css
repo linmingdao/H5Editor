@@ -114,6 +114,7 @@
   padding-right: 10px;
   padding-left: 60px;
   background-color: #f3f2f2a3;
+  user-select: none;
 }
 
 .editor .content .stage .item {
@@ -124,13 +125,36 @@
   align-items: center;
 }
 
-.editor .content .stage .item .drag-handler {
-  width: 50px;
+.editor .content .stage .item .operator {
+  width: 70px;
   height: 100%;
-  background-color: #fff;
-  cursor: move;
   font-size: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editor .content .stage .item .operator .drag-handler {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  cursor: move;
   color: #8f8f8f;
+}
+
+.editor .content .stage .item .operator .dividing-line {
+  height: 30px;
+  width: 1px;
+  background-color: #dcdcdc;
+}
+
+.editor .content .stage .item .operator .remove-btn {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  color: #f55757;
 }
 
 .editor .content .stage .item .component-wrapper {
@@ -141,9 +165,12 @@
   margin-bottom: 0;
 }
 
-.editor .content .stage .item.selected,
+.editor .content .stage .item.selected {
+  border-color: #1890ff !important;
+}
+
 .editor .content .stage .item:hover {
-  border-color: #1890ff;
+  border-color: #a2d2ff;
 }
 
 /* end 中间布局 */

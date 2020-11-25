@@ -89,6 +89,9 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     handleClear() {
       setStageItemList([]);
     },
+    handleRemove(id) {
+      setStageItemList(stageItemList.filter((item) => item.id !== id));
+    },
   };
 
   return (

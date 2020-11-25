@@ -13,8 +13,8 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <H5Editor
-          tmplPanelWidth={330}
-          attrPanelWidth={330}
+          tmplPanelWidth={300}
+          attrPanelWidth={300}
           stageBgColor="#f3f2f2a3"
           stageActiveColor="#1890ff80"
           stageDropColor="#1890ff5c"
