@@ -17,7 +17,7 @@ interface SelectInfo extends MenuInfo {
 }
 
 const Templates: React.FC = () => {
-  const { uniformTmplGroupList } = useContext(EditorContext);
+  const { tmplPanelWidth, uniformTmplGroupList } = useContext(EditorContext);
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
   const [currentComponents, setCurrentComponents] = useState(
     uniformTmplGroupList[0]["components"]
@@ -30,7 +30,10 @@ const Templates: React.FC = () => {
   };
 
   return (
-    <div className="templates">
+    <div
+      className="templates"
+      style={{ width: tmplPanelWidth ? tmplPanelWidth : 330 }}
+    >
       <Menu
         mode="inline"
         theme="light"
@@ -46,7 +49,7 @@ const Templates: React.FC = () => {
           />
         ))}
       </Menu>
-      <div className="category">
+      <div className="category uniform-scrollbar">
         <div className="title">
           {uniformTmplGroupList[currentGroupIndex]["title"]}
         </div>

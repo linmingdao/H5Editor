@@ -74,6 +74,11 @@ export type UniformTmplGroupList = UniformTmplGroup[];
 export interface H5EditorProps {
   brickTemplate: BrickTemplate;
   buildingTemplateGroupList: BuildingTemplateGroupList;
+  stageBgColor?: string;
+  stageActiveColor?: string;
+  stageDropColor?: string;
+  tmplPanelWidth?: number;
+  attrPanelWidth?: number;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -83,6 +88,11 @@ export type SelectedCallback = (selectedIndex: number) => void;
 export type NoSelectedCallback = () => void;
 
 export interface H5EditorContext {
+  stageBgColor?: string;
+  stageActiveColor?: string;
+  stageDropColor?: string;
+  tmplPanelWidth?: number;
+  attrPanelWidth?: number;
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
   collapse: boolean;

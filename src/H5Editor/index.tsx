@@ -16,13 +16,27 @@ export const EditorContext = React.createContext<H5EditorContext>({
 });
 
 const H5Editor: React.FC<H5EditorProps> = (props) => {
-  const { brickTemplate, buildingTemplateGroupList } = props;
+  const {
+    stageBgColor,
+    stageActiveColor,
+    stageDropColor,
+    tmplPanelWidth,
+    attrPanelWidth,
+    brickTemplate,
+    buildingTemplateGroupList,
+    ...restProps
+  } = props;
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
   const [collapse, setCollapse] = useState<boolean>(false);
   const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
     -1
   );
   const passedContext: H5EditorContext = {
+    stageBgColor,
+    stageActiveColor,
+    stageDropColor,
+    tmplPanelWidth,
+    attrPanelWidth,
     uniformTmplGroupList: getUniformTmplGroupList(
       brickTemplate,
       buildingTemplateGroupList
@@ -67,7 +81,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
   return (
     <EditorContext.Provider value={passedContext}>
       <DndProvider backend={HTML5Backend}>
-        <Editor />
+        <Editor {...restProps} />
       </DndProvider>
     </EditorContext.Provider>
   );

@@ -5,9 +5,14 @@ import SortableItem from "./SortableItem";
 import BrickDynamicEngine from "../BrickDynamicEngine";
 
 const Stage: React.FC = () => {
-  const { stageItemList, handleSelect, handlePropsChange } = useContext(
-    EditorContext
-  );
+  const {
+    stageBgColor,
+    stageActiveColor,
+    stageDropColor,
+    stageItemList,
+    handleSelect,
+    handlePropsChange,
+  } = useContext(EditorContext);
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "TemplateItem",
     drop: () => ({ name: "LayoutEditor" }),
@@ -19,14 +24,14 @@ const Stage: React.FC = () => {
 
   // 高亮提示 开始拖拽 以及 可以完成拖拽放置
   const isActive = canDrop && isOver;
-  let backgroundColor = "#f3f2f2a3";
+  let backgroundColor = stageBgColor ? stageBgColor : "#f3f2f2a3";
   const $collaOutline: any = document.querySelector(".colla-outline");
   $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   if (isActive) {
-    backgroundColor = "#1890ff80";
+    backgroundColor = stageActiveColor ? stageActiveColor : "#1890ff80";
     $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   } else if (canDrop) {
-    backgroundColor = "#1890ff5c";
+    backgroundColor = stageDropColor ? stageDropColor : "#1890ff5c";
     $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   }
 
@@ -59,7 +64,11 @@ const Stage: React.FC = () => {
   }
 
   return (
-    <div ref={drop} className="stage" style={{ backgroundColor }}>
+    <div
+      ref={drop}
+      className="stage uniform-scrollbar"
+      style={{ backgroundColor }}
+    >
       {stageItemList.map((item, index) => renderItem(item, index))}
     </div>
   );

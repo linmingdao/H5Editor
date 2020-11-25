@@ -10,12 +10,20 @@ interface IAttributes {
 }
 
 const Attributes: React.FC<IAttributes> = (props) => {
-  const className = classnames("attributes", { collapse: !props.collapse });
+  const className = classnames("attributes", "uniform-scrollbar", {
+    collapse: !props.collapse,
+  });
   const {
+    attrPanelWidth,
     selectedStageItemIndex,
     stageItemList,
     handlePropsChange,
   } = useContext(EditorContext);
+  const _attrPanelWidth = !props.collapse
+    ? 0
+    : attrPanelWidth
+    ? attrPanelWidth
+    : 330;
 
   function renderAttr() {
     function handleValuesChange(changedValues: any, allValues: any) {
@@ -40,7 +48,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
   }
 
   return (
-    <div className={className}>
+    <div className={className} style={{ width: _attrPanelWidth }}>
       <div className="title">属性设置</div>
       <div className="list">{renderAttr()}</div>
     </div>

@@ -13,6 +13,13 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <H5Editor
+          tmplPanelWidth={330}
+          attrPanelWidth={330}
+          stageBgColor="#f3f2f2a3"
+          stageActiveColor="#1890ff80"
+          stageDropColor="#1890ff5c"
+          className="blink-border"
+          style={{ width: 1500, height: 1000 }}
           brickTemplate={{
             icon: <SettingOutlined translate="" />,
             loader: (name: string) => () => import(`./BasicComponents/${name}`),

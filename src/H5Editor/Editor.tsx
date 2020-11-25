@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import classnames from "classnames";
 import Toolbar from "./Toolbar";
 import Templates from "./Templates";
 import Stage from "./Stage";
@@ -6,11 +7,17 @@ import Collapse from "./Collapse";
 import Attributes from "./Attributes";
 import { EditorContext } from "./index";
 
-const Editor: React.FC = () => {
+interface EditorProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const Editor: React.FC<EditorProps> = ({ className, style }) => {
+  const classes = classnames("editor", className);
   const { collapse, setCollapse } = useContext(EditorContext);
 
   return (
-    <div className="editor">
+    <div className={classes} style={style}>
       {/* 工具栏 */}
       <Toolbar />
       <div className="content">
