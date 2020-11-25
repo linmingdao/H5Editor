@@ -116,6 +116,36 @@
   background-color: #f3f2f2a3;
 }
 
+.editor .content .stage .item {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+}
+
+.editor .content .stage .item .drag-handler {
+  width: 50px;
+  height: 100%;
+  background-color: #fff;
+  cursor: move;
+  font-size: 20px;
+  color: #636363;
+}
+
+.editor .content .stage .item .component-wrapper {
+  flex: 1;
+}
+
+.editor .content .stage .item .component-wrapper .ant-form-item {
+  margin-bottom: 0;
+}
+
+.editor .content .stage .item.selected,
+.editor .content .stage .item:hover {
+  border-color: #1890ff;
+}
+
 /* end 中间布局 */
 
 /* start colla */
@@ -207,14 +237,3 @@
 }
 
 /* end 属性设置面板 */
-
-.form-wrapper {
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #fff;
-}
-
-.form-wrapper.selected,
-.form-wrapper:hover {
-  border-color: #1890ff;
-}

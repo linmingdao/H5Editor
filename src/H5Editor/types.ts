@@ -104,10 +104,11 @@ export interface H5EditorContext {
     selectedIndex: number
   ) => void;
   handleDrop?: (item: any) => void;
+  handleClear?: NoSelectedCallback;
+  handleSelect?: SelectedCallback;
+  handleSort?: (stageItemList: StageItem[]) => void;
   handleCopy?: SelectedCallback;
   handleRemove?: SelectedCallback;
-  handleSelect?: SelectedCallback;
-  handleClear?: NoSelectedCallback;
   handleReset?: NoSelectedCallback;
   handleUndo?: NoSelectedCallback;
   handleRedo?: NoSelectedCallback;

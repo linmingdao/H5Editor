@@ -3,6 +3,7 @@ import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
 import classnames from "classnames";
 import { EditorContext } from "../index";
+import { MenuOutlined } from "@ant-design/icons";
 
 export interface ISortableItemProps {
   id: any;
@@ -73,18 +74,21 @@ const SortableItem: React.FC<ISortableItemProps> = ({
   drag(drop(ref));
 
   const { selectedStageItemIndex } = useContext(EditorContext);
-  const className = classnames("form-wrapper", {
+  const className = classnames("item", {
     selected: selectedStageItemIndex === index,
   });
 
   return (
     <div
-      className={className}
       ref={ref}
-      style={{ cursor: "move", opacity }}
+      className={className}
+      style={{ opacity }}
       onClick={() => onClick && onClick()}
     >
-      {children}
+      <div className="drag-handler">
+        <MenuOutlined translate="" />
+      </div>
+      <div className="component-wrapper">{children}</div>
     </div>
   );
 };

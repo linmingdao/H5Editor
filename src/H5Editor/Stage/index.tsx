@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from "react";
 import { useDrop } from "react-dnd";
+import update from "immutability-helper";
 import { EditorContext } from "../index";
 import SortableItem from "./SortableItem";
 import BrickDynamicEngine from "../BrickDynamicEngine";
@@ -10,6 +11,7 @@ const Stage: React.FC = () => {
     stageActiveColor,
     stageDropColor,
     stageItemList,
+    handleSort,
     handleSelect,
     handlePropsChange,
   } = useContext(EditorContext);
@@ -36,15 +38,26 @@ const Stage: React.FC = () => {
   }
 
   // 排序
-  const moveFormItem = useCallback((dragIndex: number, hoverIndex: number) => {
-    console.log(dragIndex, hoverIndex);
-  }, []);
+  const moveFormItem = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      const dragItem = stageItemList[dragIndex];
+      handleSort &&
+        handleSort(
+          update(stageItemList, {
+            $splice: [
+              [dragIndex, 1],
+              [hoverIndex, 0, dragItem],
+            ],
+          })
+        );
+    },
+    [stageItemList, handleSort]
+  );
 
   function renderItem(item: any, index: number) {
     function handleValuesChange(changedValues: any, allValues: any) {
       handlePropsChange && handlePropsChange(changedValues, allValues, index);
     }
-
     return (
       <SortableItem
         key={item.id}

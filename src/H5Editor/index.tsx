@@ -67,6 +67,9 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       setSelectedStageItemIndex(selectedIndex);
       setCollapse(selectedIndex >= 0);
     },
+    handleSort(stageItemList) {
+      setStageItemList(stageItemList);
+    },
     handleDrop(item) {
       setStageItemList([...stageItemList, { ...item, id: nanoid() }]);
     },
