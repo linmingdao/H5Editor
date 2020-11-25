@@ -72,8 +72,8 @@ export interface UniformTmplGroup {
 export type UniformTmplGroupList = UniformTmplGroup[];
 
 export interface H5EditorProps {
-  brickTemplate: BrickTemplate;
-  buildingTemplateGroupList: BuildingTemplateGroupList;
+  bricks: BrickTemplate;
+  buildings: BuildingTemplateGroupList;
   stageBgColor?: string;
   stageActiveColor?: string;
   stageDropColor?: string;

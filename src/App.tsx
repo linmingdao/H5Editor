@@ -20,7 +20,7 @@ const App: React.FC = () => {
           stageDropColor="#1890ff5c"
           className="blink-border"
           style={{ width: 1500, height: 1000 }}
-          brickTemplate={{
+          bricks={{
             icon: <SettingOutlined translate="" />,
             loader: (name: string) => () => import(`./BasicComponents/${name}`),
             getComponents: () => [
@@ -48,7 +48,7 @@ const App: React.FC = () => {
               },
             ],
           }}
-          buildingTemplateGroupList={[
+          buildings={[
             {
               icon: <AppstoreOutlined translate="" />,
               title: "模板组件",
@@ -57,23 +57,21 @@ const App: React.FC = () => {
                   label: "用户登录",
                   composes: [
                     {
-                      label: "Mysql数据源",
-                      name: "UserName",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
-                        label: "数据源",
-                        name: "source",
-                        value: "",
-                        placeholder: "请选择数据源",
+                        label: "用户名",
+                        name: "username",
+                        placeholder: "请输入",
                       },
                     },
                     {
-                      label: "Mysql数据源",
-                      name: "UserPassword",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
-                        label: "数据源",
-                        name: "source",
-                        value: "",
-                        placeholder: "请选择数据源",
+                        label: "密码",
+                        name: "password",
+                        placeholder: "再输入",
                       },
                     },
                   ],
@@ -82,22 +80,20 @@ const App: React.FC = () => {
                   label: "确认密码",
                   composes: [
                     {
-                      label: "Mysql数据源",
-                      name: "UserPassword",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
                         label: "输入密码",
                         name: "password1",
-                        value: "",
                         placeholder: "请输入",
                       },
                     },
                     {
-                      label: "Mysql数据源",
-                      name: "UserPassword",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
                         label: "确认密码",
                         name: "password2",
-                        value: "",
                         placeholder: "再次输入",
                       },
                     },
@@ -111,51 +107,47 @@ const App: React.FC = () => {
               title: "业务组件",
               getComponents: () => [
                 {
-                  label: "设置下载地址",
+                  label: "用户登录_业务",
                   composes: [
                     {
-                      label: "Mysql数据源",
-                      name: "UserName",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
-                        label: "数据源",
-                        name: "source",
-                        value: "",
-                        placeholder: "请选择数据源",
+                        label: "用户名",
+                        name: "username_yewu",
+                        placeholder: "请输入",
                       },
                     },
                     {
-                      label: "Mysql数据源",
-                      name: "UserPassword",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
-                        label: "数据源",
-                        name: "source",
-                        value: "",
-                        placeholder: "请选择数据源",
+                        label: "密码",
+                        name: "password_yewu",
+                        placeholder: "再输入",
                       },
                     },
                   ],
                 },
                 {
-                  label: "设置Apollo数据源",
+                  label: "确认密码_业务",
                   composes: [
                     {
-                      label: "Mysql数据源",
-                      name: "UserName",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
-                        label: "数据源",
-                        name: "source",
-                        value: "",
-                        placeholder: "请选择数据源",
+                        label: "输入密码",
+                        name: "password1_yewu",
+                        placeholder: "请输入",
                       },
                     },
                     {
-                      label: "Mysql数据源",
-                      name: "UserPassword",
+                      label: "标题",
+                      name: "TitleInput",
                       props: {
-                        label: "数据源",
-                        name: "source",
-                        value: "",
-                        placeholder: "请选择数据源",
+                        label: "确认密码",
+                        name: "password2_yewu",
+                        placeholder: "再次输入",
                       },
                     },
                   ],

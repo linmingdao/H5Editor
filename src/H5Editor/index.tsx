@@ -22,8 +22,8 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     stageDropColor,
     tmplPanelWidth,
     attrPanelWidth,
-    brickTemplate,
-    buildingTemplateGroupList,
+    bricks,
+    buildings,
     ...restProps
   } = props;
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
@@ -37,10 +37,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     stageDropColor,
     tmplPanelWidth,
     attrPanelWidth,
-    uniformTmplGroupList: getUniformTmplGroupList(
-      brickTemplate,
-      buildingTemplateGroupList
-    ),
+    uniformTmplGroupList: getUniformTmplGroupList(bricks, buildings),
     stageItemList,
     collapse,
     setCollapse,

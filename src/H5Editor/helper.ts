@@ -9,23 +9,23 @@ import {
 
 /**
  * 获取统一的模板数据结构
- * @param brickTemplate 基础模板
- * @param buildingTemplateGroupList 业务模板
+ * @param bricks 基础模板
+ * @param buildings 业务模板
  */
 export function getUniformTmplGroupList(
-  brickTemplate: BrickTemplate,
-  buildingTemplateGroupList: BuildingTemplateGroupList
+  bricks: BrickTemplate,
+  buildings: BuildingTemplateGroupList
 ): UniformTmplGroupList {
   return [
     // 基础组件分组信息
     {
-      icon: brickTemplate.icon,
+      icon: bricks.icon,
       title: "基础组件",
-      loader: brickTemplate.loader,
+      loader: bricks.loader,
       // [ { id, type: "Bricks", label, name, props } ]
       components:
-        (brickTemplate.getComponents &&
-          brickTemplate.getComponents().map((item) => ({
+        (bricks.getComponents &&
+          bricks.getComponents().map((item) => ({
             ...item,
             id: nanoid(),
             type: ComponentType.Bricks,
@@ -33,7 +33,7 @@ export function getUniformTmplGroupList(
         [],
     },
     // 建筑组件分组
-    ...buildingTemplateGroupList.map((item: BuildingTemplateGroup) => ({
+    ...buildings.map((item: BuildingTemplateGroup) => ({
       icon: item.icon,
       title: item.title,
       // [ { id, type: "Buildings", label, composes } ]
