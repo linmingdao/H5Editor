@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
+import { Empty } from "antd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import Editor from "./Editor";
@@ -13,6 +14,7 @@ export const EditorContext = React.createContext<H5EditorContext>({
   collapse: false,
   setCollapse: () => false,
   selectedStageItemIndex: -1,
+  emptyImageType: Empty.PRESENTED_IMAGE_SIMPLE,
 });
 
 const H5Editor: React.FC<H5EditorProps> = (props) => {
@@ -37,6 +39,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     stageDropColor,
     tmplPanelWidth,
     attrPanelWidth,
+    emptyImageType: Empty.PRESENTED_IMAGE_SIMPLE,
     uniformTmplGroupList: getUniformTmplGroupList(bricks, buildings),
     stageItemList,
     collapse,

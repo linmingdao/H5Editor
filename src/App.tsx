@@ -16,14 +16,20 @@ const App: React.FC = () => {
           tmplPanelWidth={300}
           attrPanelWidth={300}
           stageBgColor="#f3f2f2a3"
-          stageActiveColor="#1890ff80"
-          stageDropColor="#1890ff5c"
+          stageActiveColor="#1890ff2b"
+          stageDropColor="#1890ff1c"
           className="blink-border"
           style={{ width: 1500, height: 1000 }}
           bricks={{
             icon: <SettingOutlined translate="" />,
             loader: (name: string) => () => import(`./BasicComponents/${name}`),
             getComponents: () => [
+              {
+                label: "测试异常组件",
+                name: "DataSourceSelectXXX",
+                // 不用提供props属性，会自动读取基础组件里面的props属性，
+                // 而且只会设置有提供值的，没有值的会用基础组件里面的默认值代替
+              },
               {
                 label: "数据源",
                 name: "DataSourceSelect",
@@ -72,6 +78,52 @@ const App: React.FC = () => {
                         label: "密码",
                         name: "password",
                         placeholder: "再输入",
+                      },
+                    },
+                  ],
+                },
+                {
+                  label: "确认密码",
+                  composes: [
+                    {
+                      label: "标题",
+                      name: "TitleInput",
+                      props: {
+                        label: "输入密码",
+                        name: "password1",
+                        placeholder: "请输入",
+                      },
+                    },
+                    {
+                      label: "标题",
+                      name: "TitleInput",
+                      props: {
+                        label: "确认密码",
+                        name: "password2",
+                        placeholder: "再次输入",
+                      },
+                    },
+                  ],
+                },
+                {
+                  label: "确认密码",
+                  composes: [
+                    {
+                      label: "标题",
+                      name: "TitleInput",
+                      props: {
+                        label: "输入密码",
+                        name: "password1",
+                        placeholder: "请输入",
+                      },
+                    },
+                    {
+                      label: "标题",
+                      name: "TitleInput",
+                      props: {
+                        label: "确认密码",
+                        name: "password2",
+                        placeholder: "再次输入",
                       },
                     },
                   ],

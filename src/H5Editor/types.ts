@@ -93,6 +93,7 @@ export interface H5EditorContext {
   stageDropColor?: string;
   tmplPanelWidth?: number;
   attrPanelWidth?: number;
+  emptyImageType: React.ReactNode;
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
   collapse: boolean;

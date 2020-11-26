@@ -1,9 +1,11 @@
 import React, { useContext, useCallback } from "react";
+import classnames from "classnames";
+import { Empty } from "antd";
 import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 import { EditorContext } from "../index";
 import SortableItem from "./SortableItem";
-import BrickDynamicEngine from "../BrickDynamicEngine";
+import DynamicEngine from "../DynamicEngine";
 
 const Stage: React.FC = () => {
   const {
@@ -11,10 +13,17 @@ const Stage: React.FC = () => {
     stageActiveColor,
     stageDropColor,
     stageItemList,
+    emptyImageType,
     handleSort,
     handleSelect,
     handlePropsChange,
   } = useContext(EditorContext);
+
+  const isNotEmpty = stageItemList && stageItemList.length;
+  const classes = classnames("stage", "uniform-scrollbar", {
+    "empty-list": !isNotEmpty,
+  });
+
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "TemplateItem",
     drop: () => ({ name: "LayoutEditor" }),
@@ -30,10 +39,10 @@ const Stage: React.FC = () => {
   const $collaOutline: any = document.querySelector(".colla-outline");
   $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   if (isActive) {
-    backgroundColor = stageActiveColor ? stageActiveColor : "#1890ff80";
+    backgroundColor = stageActiveColor ? stageActiveColor : "#1890ff2b";
     $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   } else if (canDrop) {
-    backgroundColor = stageDropColor ? stageDropColor : "#1890ff5c";
+    backgroundColor = stageDropColor ? stageDropColor : "#1890ff1c";
     $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   }
 
@@ -66,7 +75,7 @@ const Stage: React.FC = () => {
         moveFormItem={moveFormItem}
         onClick={() => handleSelect && handleSelect(index)}
       >
-        <BrickDynamicEngine
+        <DynamicEngine
           mode="stage"
           componentName={item.name}
           componentProps={item.props}
@@ -77,12 +86,15 @@ const Stage: React.FC = () => {
   }
 
   return (
-    <div
-      ref={drop}
-      className="stage uniform-scrollbar"
-      style={{ backgroundColor }}
-    >
-      {stageItemList.map((item, index) => renderItem(item, index))}
+    <div ref={drop} className={classes} style={{ backgroundColor }}>
+      {isNotEmpty ? (
+        stageItemList.map((item, index) => renderItem(item, index))
+      ) : (
+        <Empty
+          image={emptyImageType}
+          description="赶快拖拽组件来组合你的表单页面吧~"
+        />
+      )}
     </div>
   );
 };

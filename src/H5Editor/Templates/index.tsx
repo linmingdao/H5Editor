@@ -32,7 +32,7 @@ const Templates: React.FC = () => {
   return (
     <div
       className="templates"
-      style={{ width: tmplPanelWidth ? tmplPanelWidth : 330 }}
+      style={{ width: tmplPanelWidth ? tmplPanelWidth : 300 }}
     >
       <Menu
         mode="inline"
@@ -49,7 +49,7 @@ const Templates: React.FC = () => {
           />
         ))}
       </Menu>
-      <div className="category uniform-scrollbar">
+      <div className="category">
         <div className="title">
           {uniformTmplGroupList[currentGroupIndex]["title"]}
         </div>

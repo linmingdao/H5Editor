@@ -1,7 +1,8 @@
 import React, { CSSProperties, useContext } from "react";
+import { Empty } from "antd";
 import classnames from "classnames";
 import { EditorContext } from "../index";
-import BrickDynamicEngine from "../BrickDynamicEngine";
+import DynamicEngine from "../DynamicEngine";
 
 interface IAttributes {
   collapse: boolean;
@@ -10,20 +11,16 @@ interface IAttributes {
 }
 
 const Attributes: React.FC<IAttributes> = (props) => {
-  const className = classnames("attributes", "uniform-scrollbar", {
+  const className = classnames("attributes", {
     collapse: !props.collapse,
   });
   const {
     attrPanelWidth,
-    selectedStageItemIndex,
     stageItemList,
+    selectedStageItemIndex,
     handlePropsChange,
+    emptyImageType,
   } = useContext(EditorContext);
-  const _attrPanelWidth = !props.collapse
-    ? 0
-    : attrPanelWidth
-    ? attrPanelWidth
-    : 330;
 
   function renderAttr() {
     function handleValuesChange(changedValues: any, allValues: any) {
@@ -34,7 +31,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
     const config = stageItemList[selectedStageItemIndex];
     return config ? (
       <div>
-        <BrickDynamicEngine
+        <DynamicEngine
           key={selectedStageItemIndex}
           mode="attr"
           componentName={config.name}
@@ -43,14 +40,17 @@ const Attributes: React.FC<IAttributes> = (props) => {
         />
       </div>
     ) : (
-      <div></div>
+      <Empty image={emptyImageType} description="还未选中任何控件哟~" />
     );
   }
 
   return (
-    <div className={className} style={{ width: _attrPanelWidth }}>
+    <div
+      className={className}
+      style={{ width: attrPanelWidth ? attrPanelWidth : 300 }}
+    >
       <div className="title">属性设置</div>
-      <div className="list">{renderAttr()}</div>
+      <div className="list uniform-scrollbar">{renderAttr()}</div>
     </div>
   );
 };
