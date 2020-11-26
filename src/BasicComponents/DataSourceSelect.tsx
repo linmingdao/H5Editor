@@ -2,7 +2,13 @@ import React from "react";
 import { Select, Form, Input } from "antd";
 const { Option } = Select;
 
-interface MysqlDataSourceSelectProps {
+interface ColSpan {
+  span: number;
+}
+
+interface PropsType {
+  labelCol: ColSpan;
+  wrapperCol: ColSpan;
   label?: string;
   name?: string;
   placeholder?: string;
@@ -10,61 +16,66 @@ interface MysqlDataSourceSelectProps {
   onValuesChange: (changedValues: any, allValues: any) => void;
 }
 
-const MysqlDataSourceSelect: React.FC<MysqlDataSourceSelectProps> = ({
-  mode,
-  label,
-  name,
-  placeholder,
-  onValuesChange,
-}) => {
-  function renderResult() {
-    function handleValuesChange(changedValues: any, allValues: any) {
-      onValuesChange(changedValues, allValues);
-    }
+function Stage(props: PropsType) {
+  const {
+    label,
+    name,
+    placeholder,
+    labelCol,
+    wrapperCol,
+    onValuesChange,
+  } = props;
+  return (
+    <Form
+      labelCol={labelCol}
+      wrapperCol={wrapperCol}
+      onValuesChange={(changedValues, allValues) =>
+        onValuesChange(changedValues, allValues)
+      }
+    >
+      <Form.Item label={label} name={name}>
+        <Select style={{ width: "100%" }} placeholder={placeholder}>
+          <Option value="source1">source 1</Option>
+          <Option value="source2">source 2</Option>
+          <Option value="source3">source 3</Option>
+        </Select>
+      </Form.Item>
+    </Form>
+  );
+}
 
-    if (mode === "stage") {
-      return (
-        <Form
-          {...{ labelCol: { span: 6 }, wrapperCol: { span: 18 } }}
-          onValuesChange={handleValuesChange}
-        >
-          <Form.Item label={label} name={name}>
-            <Select style={{ width: "100%" }} placeholder={placeholder}>
-              <Option value="source1">source 1</Option>
-              <Option value="source2">source 2</Option>
-              <Option value="source3">source 3</Option>
-            </Select>
-          </Form.Item>
-        </Form>
-      );
-    } else if (mode === "attr") {
-      return (
-        <Form
-          {...{ labelCol: { span: 12 }, wrapperCol: { span: 12 } }}
-          labelAlign="left"
-          initialValues={{
-            label,
-            placeholder,
-          }}
-          onValuesChange={handleValuesChange}
-        >
-          <Form.Item label="label" name="label">
-            <Input placeholder="请输入" />
-          </Form.Item>
-          <Form.Item label="placeholder" name="placeholder">
-            <Input placeholder="请输入" />
-          </Form.Item>
-        </Form>
-      );
-    } else {
-      return <div></div>;
-    }
-  }
+function Attr(props: PropsType) {
+  const { label, placeholder, onValuesChange } = props;
+  return (
+    <Form
+      {...{ labelCol: { span: 12 }, wrapperCol: { span: 12 } }}
+      labelAlign="left"
+      initialValues={{
+        label,
+        placeholder,
+      }}
+      onValuesChange={(changedValues, allValues) =>
+        onValuesChange(changedValues, allValues)
+      }
+    >
+      <Form.Item label="label" name="label">
+        <Input placeholder="请输入" />
+      </Form.Item>
+      <Form.Item label="placeholder" name="placeholder">
+        <Input placeholder="请输入" />
+      </Form.Item>
+    </Form>
+  );
+}
 
-  return renderResult();
+const MysqlDataSourceSelect: React.FC<PropsType> = (props) => {
+  const { mode } = props;
+  return mode === "stage" ? Stage(props) : Attr(props);
 };
 
 MysqlDataSourceSelect.defaultProps = {
+  labelCol: { span: 6 },
+  wrapperCol: { span: 18 },
   label: "数据源",
   name: "source",
   placeholder: "请选择数据源",
