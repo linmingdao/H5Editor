@@ -45,7 +45,6 @@ const App: React.FC = () => {
                   name: "remark",
                   rows: 3,
                   placeholder: "请输入",
-                  mode: "stage",
                 },
               },
               {

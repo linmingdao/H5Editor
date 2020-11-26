@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from "react";
 import classnames from "classnames";
+import { Mode } from "../constants";
 import { Empty } from "antd";
 import { useDrop } from "react-dnd";
 import update from "immutability-helper";
@@ -76,7 +77,7 @@ const Stage: React.FC = () => {
         onClick={() => handleSelect && handleSelect(index)}
       >
         <DynamicEngine
-          mode="stage"
+          mode={Mode.Stage}
           componentName={item.name}
           componentProps={item.props}
           onValuesChange={handleValuesChange}

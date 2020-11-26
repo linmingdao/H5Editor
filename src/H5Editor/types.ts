@@ -1,4 +1,5 @@
 import React from "react";
+import { ComponentType } from "./constants";
 
 export type Loader = (name: string) => any;
 
@@ -43,7 +44,7 @@ export interface UniformBrickTmplProps {
 
 export interface UniformBrickTmpl {
   id: string;
-  type: "Bricks";
+  type: ComponentType.Bricks;
   label: string;
   name: string;
   props: UniformBrickTmplProps;

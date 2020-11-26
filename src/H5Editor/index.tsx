@@ -4,6 +4,7 @@ import { Empty } from "antd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import Editor from "./Editor";
+import { ComponentType } from "./constants";
 import { H5EditorProps, H5EditorContext, StageItem } from "./types";
 import { getUniformTmplGroupList } from "./helper";
 import "./index.css";
@@ -75,7 +76,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       setStageItemList(stageItemList);
     },
     handleDrop(item) {
-      if (item.type === "Bricks") {
+      if (item.type === ComponentType.Bricks) {
         setStageItemList([...stageItemList, { ...item, id: nanoid() }]);
       } else {
         const composes = item.composes;
@@ -84,7 +85,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
           ...composes.map((item: any) => ({
             ...item,
             id: nanoid(),
-            type: "Bricks",
+            type: ComponentType.Bricks,
           })),
         ]);
       }

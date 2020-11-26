@@ -4,3 +4,8 @@ export enum ComponentType {
 }
 
 export type ComponentTypeLiteral = "Bricks" | "Buildings";
+
+export enum Mode {
+  Stage = "stage",
+  Attr = "attr",
+}

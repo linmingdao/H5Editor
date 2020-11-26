@@ -1,5 +1,6 @@
 import React, { CSSProperties, useContext } from "react";
 import { Empty } from "antd";
+import { Mode } from "../constants";
 import classnames from "classnames";
 import { EditorContext } from "../index";
 import DynamicEngine from "../DynamicEngine";
@@ -33,7 +34,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
       <div>
         <DynamicEngine
           key={selectedStageItemIndex}
-          mode="attr"
+          mode={Mode.Attr}
           componentName={config.name}
           componentProps={config.props}
           onValuesChange={handleValuesChange}
