@@ -6,4 +6,5 @@ export enum ComponentType {
 export enum Mode {
   Stage = "stage",
   Attr = "attr",
+  Output = "output",
 }

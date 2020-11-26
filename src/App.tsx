@@ -41,7 +41,7 @@ const App: React.FC = () => {
                 name: "RemarkTextArea",
                 // 可以不用设置props属性，如果你想去覆盖的话，可以设置
                 props: {
-                  label: "备注sssss",
+                  label: "备注信息",
                   name: "remark",
                   rows: 3,
                   placeholder: "请输入",

@@ -9,37 +9,41 @@ interface ColSpan {
 interface PropsType {
   labelCol: ColSpan;
   wrapperCol: ColSpan;
+  value?: string;
   label?: string;
   name?: string;
   placeholder?: string;
-  mode?: string; // tpl, stage, attr
+  mode?: string; // output, stage, attr
   onValuesChange: (changedValues: any, allValues: any) => void;
 }
 
+function Output(props: PropsType) {
+  const { label, name, placeholder } = props;
+  return (
+    <Form.Item label={label} name={name}>
+      <Select
+        style={{ width: "100%", textAlign: "left" }}
+        placeholder={placeholder}
+      >
+        <Option value="source1">source 1</Option>
+        <Option value="source2">source 2</Option>
+        <Option value="source3">source 3</Option>
+      </Select>
+    </Form.Item>
+  );
+}
+
 function Stage(props: PropsType) {
-  const {
-    label,
-    name,
-    placeholder,
-    labelCol,
-    wrapperCol,
-    onValuesChange,
-  } = props;
+  const { labelCol, wrapperCol, name, value, onValuesChange } = props;
+  const initialValues = { [name as string]: value };
   return (
     <Form
       labelCol={labelCol}
       wrapperCol={wrapperCol}
-      onValuesChange={(changedValues, allValues) =>
-        onValuesChange(changedValues, allValues)
-      }
+      initialValues={initialValues}
+      onValuesChange={onValuesChange}
     >
-      <Form.Item label={label} name={name}>
-        <Select style={{ width: "100%" }} placeholder={placeholder}>
-          <Option value="source1">source 1</Option>
-          <Option value="source2">source 2</Option>
-          <Option value="source3">source 3</Option>
-        </Select>
-      </Form.Item>
+      {Output(props)}
     </Form>
   );
 }
@@ -54,9 +58,7 @@ function Attr(props: PropsType) {
         label,
         placeholder,
       }}
-      onValuesChange={(changedValues, allValues) =>
-        onValuesChange(changedValues, allValues)
-      }
+      onValuesChange={onValuesChange}
     >
       <Form.Item label="label" name="label">
         <Input placeholder="请输入" />
@@ -70,12 +72,20 @@ function Attr(props: PropsType) {
 
 const MysqlDataSourceSelect: React.FC<PropsType> = (props) => {
   const { mode } = props;
-  return mode === "stage" ? Stage(props) : Attr(props);
+  switch (mode) {
+    case "stage":
+      return Stage(props);
+    case "attr":
+      return Attr(props);
+    default:
+      return Output(props);
+  }
 };
 
 MysqlDataSourceSelect.defaultProps = {
   labelCol: { span: 6 },
   wrapperCol: { span: 18 },
+  value: "source2",
   label: "数据源",
   name: "source",
   placeholder: "请选择数据源",
