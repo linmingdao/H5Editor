@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./App.css";
-import H5Editor from "./H5Editor";
+import H5Editor from "./Editor";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -22,7 +22,7 @@ const App: React.FC = () => {
           style={{ width: 1500, height: 1000 }}
           bricks={{
             icon: <SettingOutlined translate="" />,
-            loader: (name: string) => () => import(`./BasicComponents/${name}`),
+            loader: (name: string) => () => import(`./Bricks/${name}`),
             getComponents: () => [
               {
                 label: "测试异常组件",
