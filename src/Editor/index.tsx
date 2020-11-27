@@ -4,12 +4,18 @@ import { Empty } from "antd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import Editor from "./Editor";
-import { ComponentType } from "./constants";
-import { H5EditorProps, H5EditorContext, StageItem } from "./types";
+import { FormGlobalSettingsDefaultProps, ComponentType } from "./constants";
+import {
+  FormGlobalSettingsProps,
+  H5EditorProps,
+  H5EditorContext,
+  StageItem,
+} from "./types";
 import { getUniformTmplGroupList } from "./helper";
 import "./index.css";
 
 export const EditorContext = React.createContext<H5EditorContext>({
+  globalFormSettings: { ...FormGlobalSettingsDefaultProps },
   uniformTmplGroupList: [],
   stageItemList: [],
   collapse: false,
@@ -25,22 +31,30 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     stageDropColor,
     tmplPanelWidth,
     attrPanelWidth,
+    attLabelWrapperCol,
     bricks,
     buildings,
     ...restProps
   } = props;
+
+  const [globalFormSettings, setGlobalFormSettings] = useState<
+    FormGlobalSettingsProps
+  >({ ...FormGlobalSettingsDefaultProps });
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
   const [collapse, setCollapse] = useState<boolean>(false);
   const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
     -1
   );
+
   const passedContext: H5EditorContext = {
     stageBgColor,
     stageActiveColor,
     stageDropColor,
     tmplPanelWidth,
     attrPanelWidth,
+    attLabelWrapperCol,
     emptyImageType: Empty.PRESENTED_IMAGE_SIMPLE,
+    globalFormSettings,
     uniformTmplGroupList: getUniformTmplGroupList(bricks, buildings),
     stageItemList,
     collapse,
@@ -66,6 +80,12 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
           }
         })
       );
+    },
+    handleGFSettingsChange(changedValues: any) {
+      setGlobalFormSettings({
+        ...globalFormSettings,
+        ...changedValues,
+      });
     },
     handleSelect(selectedIndex: number) {
       setSelectedStageItemIndex(selectedIndex);

@@ -1,5 +1,6 @@
 import React, { CSSProperties, useContext } from "react";
 import { Empty } from "antd";
+import FormGlobalSettings from "./FormGlobalSettings";
 import { Mode } from "../constants";
 import classnames from "classnames";
 import { EditorContext } from "../index";
@@ -50,8 +51,12 @@ const Attributes: React.FC<IAttributes> = (props) => {
       className={className}
       style={{ width: attrPanelWidth ? attrPanelWidth : 300 }}
     >
-      <div className="title">属性设置</div>
-      <div className="list uniform-scrollbar">{renderAttr()}</div>
+      <div className="title">Form 属性设置</div>
+      <div className="list">
+        <FormGlobalSettings />
+      </div>
+      <div className="title">Item 属性设置</div>
+      <div className="list">{renderAttr()}</div>
     </div>
   );
 };

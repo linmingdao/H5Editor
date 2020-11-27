@@ -1,18 +1,20 @@
 import React, { useContext, useCallback } from "react";
 import classnames from "classnames";
 import { Mode } from "../constants";
-import { Empty } from "antd";
+import { Form, Empty } from "antd";
 import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 import { EditorContext } from "../index";
 import SortableItem from "./SortableItem";
 import DynamicEngine from "../DynamicEngine";
+import { convertGlobalFormSettings } from "../helper";
 
 const Stage: React.FC = () => {
   const {
     stageBgColor,
     stageActiveColor,
     stageDropColor,
+    globalFormSettings,
     stageItemList,
     emptyImageType,
     handleSort,
@@ -89,7 +91,9 @@ const Stage: React.FC = () => {
   return (
     <div ref={drop} className={classes} style={{ backgroundColor }}>
       {isNotEmpty ? (
-        stageItemList.map((item, index) => renderItem(item, index))
+        <Form {...convertGlobalFormSettings(globalFormSettings)}>
+          {stageItemList.map((item, index) => renderItem(item, index))}
+        </Form>
       ) : (
         <Empty
           image={emptyImageType}

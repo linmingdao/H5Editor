@@ -80,6 +80,7 @@ export interface H5EditorProps {
   stageDropColor?: string;
   tmplPanelWidth?: number;
   attrPanelWidth?: number;
+  attLabelWrapperCol?: [number, number];
   className?: string;
   style?: React.CSSProperties;
 }
@@ -94,7 +95,9 @@ export interface H5EditorContext {
   stageDropColor?: string;
   tmplPanelWidth?: number;
   attrPanelWidth?: number;
+  attLabelWrapperCol?: [number, number];
   emptyImageType: React.ReactNode;
+  globalFormSettings: FormGlobalSettingsProps;
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
   collapse: boolean;
@@ -105,6 +108,7 @@ export interface H5EditorContext {
     allValues: any,
     selectedIndex: number
   ) => void;
+  handleGFSettingsChange?: (changedValues: any, allValues: any) => void;
   handleDrop?: (item: any) => void;
   handleClear?: NoSelectedCallback;
   handleSelect?: SelectedCallback;
@@ -125,4 +129,17 @@ export interface StageItem {
 
 export interface BrickSchema {
   onAttributesChange: (attrs: any) => void;
+}
+
+type labelAlignLiteral = "right" | "left";
+type layoutLiteral = "horizontal" | "vertical" | "inline";
+
+export interface FormGlobalSettingsProps {
+  name?: string;
+  colon?: string;
+  preserve?: string;
+  layout?: layoutLiteral;
+  labelAlign?: labelAlignLiteral;
+  labelCol?: number;
+  wrapperCol?: number;
 }

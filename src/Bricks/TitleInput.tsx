@@ -19,7 +19,7 @@ interface PropsType {
   onValuesChange: (changedValues: any, allValues: any) => void;
 }
 
-function Output(props: PropsType) {
+function Stage(props: PropsType) {
   const { label, name, placeholder, backgroundColor } = props;
   return (
     <Form.Item label={label} name={name}>
@@ -28,20 +28,20 @@ function Output(props: PropsType) {
   );
 }
 
-function Stage(props: PropsType) {
-  const { labelCol, wrapperCol, name, value, onValuesChange } = props;
-  const initialValues = { [name as string]: value };
-  return (
-    <Form
-      labelCol={labelCol}
-      wrapperCol={wrapperCol}
-      initialValues={initialValues}
-      onValuesChange={onValuesChange}
-    >
-      {Output(props)}
-    </Form>
-  );
-}
+// function Stage(props: PropsType) {
+//   const { labelCol, wrapperCol, name, value, onValuesChange } = props;
+//   const initialValues = { [name as string]: value };
+//   return (
+//     <Form
+//       labelCol={labelCol}
+//       wrapperCol={wrapperCol}
+//       initialValues={initialValues}
+//       onValuesChange={onValuesChange}
+//     >
+//       {Output(props)}
+//     </Form>
+//   );
+// }
 
 function Attr(props: PropsType) {
   const {
@@ -101,7 +101,7 @@ const TitleInput: React.FC<PropsType> = (props) => {
     case "attr":
       return Attr(props);
     default:
-      return Output(props);
+      return Stage(props);
   }
 };
 
