@@ -32,12 +32,13 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     tmplPanelWidth,
     attrPanelWidth,
     attLabelWrapperCol,
+    enableBuildingsFormSettings,
     bricks,
     buildings,
     ...restProps
   } = props;
 
-  const [formSettings, setGlobalFormSettings] = useState<FormSettingsProps>({
+  const [formSettings, setFormSettings] = useState<FormSettingsProps>({
     ...defaultFormSettings,
   });
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
@@ -78,7 +79,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       );
     },
     handleFormSettingsChange(changedValues: any) {
-      setGlobalFormSettings({
+      setFormSettings({
         ...formSettings,
         ...changedValues,
       });
@@ -95,6 +96,9 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       if (item.type === ComponentType.Bricks) {
         setStageItemList([...stageItemList, { ...item, id: nanoid() }]);
       } else {
+        enableBuildingsFormSettings &&
+          item.formSettings &&
+          setFormSettings({ ...formSettings, ...item.formSettings });
         const composes = item.composes;
         setStageItemList([
           ...stageItemList,

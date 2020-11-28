@@ -24,6 +24,7 @@ export interface BrickTemplate {
 
 export interface BuildingComponent {
   label: string;
+  formSettings?: ObjProps;
   composes: BrickComponent[];
 }
 
@@ -81,6 +82,7 @@ export interface H5EditorProps {
   tmplPanelWidth?: number;
   attrPanelWidth?: number;
   attLabelWrapperCol?: [number, number];
+  enableBuildingsFormSettings?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }

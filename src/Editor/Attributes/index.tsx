@@ -17,6 +17,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
     collapse: !props.collapse,
   });
   const {
+    formSettings,
     attrPanelWidth,
     stageItemList,
     selectedStageItemIndex,
@@ -57,7 +58,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
     >
       <div className="title">Form 属性设置</div>
       <div className="list">
-        <FormSettings />
+        <FormSettings {...formSettings} />
       </div>
       <div className="title">Item 属性设置</div>
       <div className="list">{renderAttr()}</div>

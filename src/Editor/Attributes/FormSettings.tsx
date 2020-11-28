@@ -12,6 +12,8 @@ const FormGlobalSettings: React.FC<FormSettingsProps> = (props) => {
     attLabelWrapperCol = [12, 12],
   } = useContext(EditorContext);
 
+  console.log(props);
+
   return (
     <Form
       {...{
@@ -19,7 +21,7 @@ const FormGlobalSettings: React.FC<FormSettingsProps> = (props) => {
         wrapperCol: { span: attLabelWrapperCol[1] },
       }}
       labelAlign="left"
-      initialValues={{ ...props }}
+      initialValues={props}
       onValuesChange={handleFormSettingsChange}
     >
       <Form.Item label="name" name="name">

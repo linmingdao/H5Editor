@@ -34,17 +34,21 @@ function Stage(props: PropsType) {
 }
 
 function Attr(props: PropsType) {
-  const { label, placeholder, onValuesChange } = props;
+  const { name, label, placeholder, onValuesChange } = props;
   return (
     <Form
       {...{ labelCol: { span: 12 }, wrapperCol: { span: 12 } }}
       labelAlign="left"
       initialValues={{
+        name,
         label,
         placeholder,
       }}
       onValuesChange={onValuesChange}
     >
+      <Form.Item label="name" name="name">
+        <Input placeholder="请输入" allowClear />
+      </Form.Item>
       <Form.Item label="label" name="label">
         <Input placeholder="请输入" />
       </Form.Item>

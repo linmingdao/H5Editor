@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { ComponentType } from "./constants";
 import {
+  StageItem,
   BrickTemplate,
   BuildingTemplateGroup,
   BuildingTemplateGroupList,
@@ -56,10 +57,16 @@ export function convertFormSettings(settings: FormSettingsProps) {
     colon: settings.colon && settings.colon === "true" ? true : false,
     preserve: settings.preserve && settings.preserve === "true" ? true : false,
     labelCol: {
-      span: settings.labelCol ? settings.labelCol : 6,
+      span: settings.labelCol ? Number(settings.labelCol) : 6,
     },
     wrapperCol: {
-      span: settings.wrapperCol ? settings.wrapperCol : 18,
+      span: settings.wrapperCol ? Number(settings.wrapperCol) : 18,
     },
   };
 }
+
+// TODO:解析表单的初始值
+export function resolveFormInitialValues(stageItemList: StageItem[]) {}
+
+// TODO:检查 name 的唯一性
+export function checkStageItemNamesUnicity(stageItemList: StageItem[]) {}

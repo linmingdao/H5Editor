@@ -21,6 +21,7 @@ const App: React.FC = () => {
           className="blink-border"
           attLabelWrapperCol={[12, 12]}
           style={{ width: 1500, height: 1000 }}
+          enableBuildingsFormSettings={true}
           bricks={{
             icon: <SettingOutlined translate="" />,
             loader: (name: string) => () => import(`./Bricks/${name}`),
@@ -61,6 +62,15 @@ const App: React.FC = () => {
               getComponents: () => [
                 {
                   label: "用户登录",
+                  formSettings: {
+                    name: "loginForm",
+                    colon: "true",
+                    preserve: "true",
+                    layout: "horizontal",
+                    labelAlign: "right",
+                    labelCol: 12,
+                    wrapperCol: 12,
+                  },
                   composes: [
                     {
                       label: "标题",
@@ -84,52 +94,15 @@ const App: React.FC = () => {
                 },
                 {
                   label: "确认密码",
-                  composes: [
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "输入密码",
-                        name: "password1",
-                        placeholder: "请输入",
-                      },
-                    },
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "确认密码",
-                        name: "password2",
-                        placeholder: "再次输入",
-                      },
-                    },
-                  ],
-                },
-                {
-                  label: "确认密码",
-                  composes: [
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "输入密码",
-                        name: "password1",
-                        placeholder: "请输入",
-                      },
-                    },
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "确认密码",
-                        name: "password2",
-                        placeholder: "再次输入",
-                      },
-                    },
-                  ],
-                },
-                {
-                  label: "确认密码",
+                  formSettings: {
+                    name: "passwordForm",
+                    colon: "false",
+                    preserve: "false",
+                    layout: "horizontal",
+                    labelAlign: "left",
+                    labelCol: 4,
+                    wrapperCol: 20,
+                  },
                   composes: [
                     {
                       label: "标题",
