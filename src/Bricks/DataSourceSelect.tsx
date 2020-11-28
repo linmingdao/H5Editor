@@ -13,7 +13,7 @@ interface PropsType {
   label?: string;
   name?: string;
   placeholder?: string;
-  mode?: string; // output, stage, attr
+  mode?: string; // stage, attr
   onValuesChange: (changedValues: any, allValues: any) => void;
 }
 
@@ -32,21 +32,6 @@ function Stage(props: PropsType) {
     </Form.Item>
   );
 }
-
-// function Stage(props: PropsType) {
-//   const { labelCol, wrapperCol, name, value, onValuesChange } = props;
-//   const initialValues = { [name as string]: value };
-//   return (
-//     <Form
-//       labelCol={labelCol}
-//       wrapperCol={wrapperCol}
-//       initialValues={initialValues}
-//       onValuesChange={onValuesChange}
-//     >
-//       {Output(props)}
-//     </Form>
-//   );
-// }
 
 function Attr(props: PropsType) {
   const { label, placeholder, onValuesChange } = props;
@@ -71,8 +56,7 @@ function Attr(props: PropsType) {
 }
 
 const MysqlDataSourceSelect: React.FC<PropsType> = (props) => {
-  const { mode } = props;
-  switch (mode) {
+  switch (props.mode) {
     case "stage":
       return Stage(props);
     case "attr":

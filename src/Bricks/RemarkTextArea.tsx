@@ -28,21 +28,6 @@ function Stage(props: PropsType) {
   );
 }
 
-// function Stage(props: PropsType) {
-//   const { labelCol, wrapperCol, name, value, onValuesChange } = props;
-//   const initialValues = { [name as string]: value };
-//   return (
-//     <Form
-//       labelCol={labelCol}
-//       wrapperCol={wrapperCol}
-//       initialValues={initialValues}
-//       onValuesChange={onValuesChange}
-//     >
-//       {Output(props)}
-//     </Form>
-//   );
-// }
-
 function Attr(props: PropsType) {
   const { label, placeholder, rows, onValuesChange } = props;
   return (
@@ -71,8 +56,7 @@ function Attr(props: PropsType) {
 }
 
 const RemarkTextArea: React.FC<PropsType> = (props) => {
-  const { mode } = props;
-  switch (mode) {
+  switch (props.mode) {
     case "stage":
       return Stage(props);
     case "attr":
