@@ -1,6 +1,6 @@
 import React, { CSSProperties, useContext } from "react";
 import { Empty } from "antd";
-import FormGlobalSettings from "./FormGlobalSettings";
+import FormSettings from "./FormSettings";
 import { Mode } from "../constants";
 import classnames from "classnames";
 import { EditorContext } from "../index";
@@ -20,14 +20,18 @@ const Attributes: React.FC<IAttributes> = (props) => {
     attrPanelWidth,
     stageItemList,
     selectedStageItemIndex,
-    handlePropsChange,
+    handleStageItemPropsChange,
     emptyImageType,
   } = useContext(EditorContext);
 
   function renderAttr() {
     function handleValuesChange(changedValues: any, allValues: any) {
-      handlePropsChange &&
-        handlePropsChange(changedValues, allValues, selectedStageItemIndex);
+      handleStageItemPropsChange &&
+        handleStageItemPropsChange(
+          selectedStageItemIndex,
+          changedValues,
+          allValues
+        );
     }
 
     const config = stageItemList[selectedStageItemIndex];
@@ -53,7 +57,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
     >
       <div className="title">Form 属性设置</div>
       <div className="list">
-        <FormGlobalSettings />
+        <FormSettings />
       </div>
       <div className="title">Item 属性设置</div>
       <div className="list">{renderAttr()}</div>

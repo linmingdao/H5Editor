@@ -7,19 +7,19 @@ import update from "immutability-helper";
 import { EditorContext } from "../index";
 import SortableItem from "./SortableItem";
 import DynamicEngine from "../DynamicEngine";
-import { convertGlobalFormSettings } from "../helper";
+import { convertFormSettings } from "../helper";
 
 const Stage: React.FC = () => {
   const {
     stageBgColor,
     stageActiveColor,
     stageDropColor,
-    globalFormSettings,
+    formSettings,
     stageItemList,
     emptyImageType,
     handleSort,
     handleSelect,
-    handlePropsChange,
+    handleStageItemPropsChange,
   } = useContext(EditorContext);
 
   const isNotEmpty = stageItemList && stageItemList.length;
@@ -68,7 +68,8 @@ const Stage: React.FC = () => {
 
   function renderItem(item: any, index: number) {
     function handleValuesChange(changedValues: any, allValues: any) {
-      handlePropsChange && handlePropsChange(changedValues, allValues, index);
+      handleStageItemPropsChange &&
+        handleStageItemPropsChange(index, changedValues, allValues);
     }
     return (
       <SortableItem
@@ -91,7 +92,7 @@ const Stage: React.FC = () => {
   return (
     <div ref={drop} className={classes} style={{ backgroundColor }}>
       {isNotEmpty ? (
-        <Form {...convertGlobalFormSettings(globalFormSettings)}>
+        <Form {...convertFormSettings(formSettings)}>
           {stageItemList.map((item, index) => renderItem(item, index))}
         </Form>
       ) : (

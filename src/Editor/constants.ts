@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { FormGlobalSettingsProps } from "./types";
+import { FormSettingsProps } from "./types";
 
 export enum ComponentType {
   Bricks = "bricks",
@@ -12,7 +12,7 @@ export enum Mode {
   Output = "output",
 }
 
-export const FormGlobalSettingsDefaultProps: FormGlobalSettingsProps = {
+export const defaultFormSettings: FormSettingsProps = {
   name: `name_${nanoid()}`,
   colon: "true",
   preserve: "true",

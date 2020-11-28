@@ -4,9 +4,9 @@ import { Empty } from "antd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import Editor from "./Editor";
-import { FormGlobalSettingsDefaultProps, ComponentType } from "./constants";
+import { defaultFormSettings, ComponentType } from "./constants";
 import {
-  FormGlobalSettingsProps,
+  FormSettingsProps,
   H5EditorProps,
   H5EditorContext,
   StageItem,
@@ -15,7 +15,7 @@ import { getUniformTmplGroupList } from "./helper";
 import "./index.css";
 
 export const EditorContext = React.createContext<H5EditorContext>({
-  globalFormSettings: { ...FormGlobalSettingsDefaultProps },
+  formSettings: { ...defaultFormSettings },
   uniformTmplGroupList: [],
   stageItemList: [],
   collapse: false,
@@ -37,9 +37,9 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     ...restProps
   } = props;
 
-  const [globalFormSettings, setGlobalFormSettings] = useState<
-    FormGlobalSettingsProps
-  >({ ...FormGlobalSettingsDefaultProps });
+  const [formSettings, setGlobalFormSettings] = useState<FormSettingsProps>({
+    ...defaultFormSettings,
+  });
   const [stageItemList, setStageItemList] = useState<StageItem[]>([]);
   const [collapse, setCollapse] = useState<boolean>(false);
   const [selectedStageItemIndex, setSelectedStageItemIndex] = useState<number>(
@@ -54,17 +54,13 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     attrPanelWidth,
     attLabelWrapperCol,
     emptyImageType: Empty.PRESENTED_IMAGE_SIMPLE,
-    globalFormSettings,
+    formSettings,
     uniformTmplGroupList: getUniformTmplGroupList(bricks, buildings),
     stageItemList,
     collapse,
     setCollapse,
     selectedStageItemIndex,
-    handlePropsChange(
-      changedValues: any,
-      allValues: any,
-      selectedIndex: number
-    ) {
+    handleStageItemPropsChange(selectedIndex: number, changedValues: any) {
       setStageItemList(
         stageItemList.map((item, index) => {
           if (index === selectedIndex) {
@@ -81,9 +77,9 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
         })
       );
     },
-    handleGFSettingsChange(changedValues: any) {
+    handleFormSettingsChange(changedValues: any) {
       setGlobalFormSettings({
-        ...globalFormSettings,
+        ...formSettings,
         ...changedValues,
       });
     },

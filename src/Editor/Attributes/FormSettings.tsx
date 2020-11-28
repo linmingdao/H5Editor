@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { Form, Select, Input } from "antd";
-import { FormGlobalSettingsProps } from "../types";
-import { FormGlobalSettingsDefaultProps } from "../constants";
+import { FormSettingsProps } from "../types";
+import { defaultFormSettings } from "../constants";
 import { EditorContext } from "../index";
 
 const { Option } = Select;
 
-const FormGlobalSettings: React.FC<FormGlobalSettingsProps> = (props) => {
-  const { handleGFSettingsChange, attLabelWrapperCol = [12, 12] } = useContext(
-    EditorContext
-  );
+const FormGlobalSettings: React.FC<FormSettingsProps> = (props) => {
+  const {
+    handleFormSettingsChange,
+    attLabelWrapperCol = [12, 12],
+  } = useContext(EditorContext);
 
   return (
     <Form
@@ -19,7 +20,7 @@ const FormGlobalSettings: React.FC<FormGlobalSettingsProps> = (props) => {
       }}
       labelAlign="left"
       initialValues={{ ...props }}
-      onValuesChange={handleGFSettingsChange}
+      onValuesChange={handleFormSettingsChange}
     >
       <Form.Item label="name" name="name">
         <Input placeholder="请输入" />
@@ -71,7 +72,7 @@ const FormGlobalSettings: React.FC<FormGlobalSettingsProps> = (props) => {
   );
 };
 
-FormGlobalSettings.defaultProps = { ...FormGlobalSettingsDefaultProps };
+FormGlobalSettings.defaultProps = { ...defaultFormSettings };
 
 FormGlobalSettings.displayName = "FormGlobalSettings";
 

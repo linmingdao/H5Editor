@@ -5,7 +5,7 @@ import {
   BuildingTemplateGroup,
   BuildingTemplateGroupList,
   UniformTmplGroupList,
-  FormGlobalSettingsProps,
+  FormSettingsProps,
 } from "./types";
 
 /**
@@ -50,24 +50,16 @@ export function getUniformTmplGroupList(
   ];
 }
 
-export function convertGlobalFormSettings(
-  globalFormSettings: FormGlobalSettingsProps
-) {
+export function convertFormSettings(settings: FormSettingsProps) {
   return {
-    ...globalFormSettings,
-    colon:
-      globalFormSettings.colon && globalFormSettings.colon === "true"
-        ? true
-        : false,
-    preserve:
-      globalFormSettings.preserve && globalFormSettings.preserve === "true"
-        ? true
-        : false,
+    ...settings,
+    colon: settings.colon && settings.colon === "true" ? true : false,
+    preserve: settings.preserve && settings.preserve === "true" ? true : false,
     labelCol: {
-      span: globalFormSettings.labelCol ? globalFormSettings.labelCol : 6,
+      span: settings.labelCol ? settings.labelCol : 6,
     },
     wrapperCol: {
-      span: globalFormSettings.wrapperCol ? globalFormSettings.wrapperCol : 18,
+      span: settings.wrapperCol ? settings.wrapperCol : 18,
     },
   };
 }
