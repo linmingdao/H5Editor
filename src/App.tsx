@@ -1,17 +1,73 @@
-import React from "react";
-import "antd/dist/antd.css";
-import "./App.css";
-import H5Editor from "./Editor";
+import React from 'react'
+import 'antd/dist/antd.css'
+import './App.css'
+import H5Editor from './Editor'
 import {
   AppstoreOutlined,
   SettingOutlined,
   PieChartOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons'
+import { renderForm } from './Editor/index'
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <div
+          style={{
+            width: 1200,
+            backgroundColor: '#fff',
+            padding: 50,
+            marginTop: 50,
+          }}
+        >
+          {renderForm((name: string) => () => import(`./Bricks/${name}`), {
+            label: '文章模板',
+            formSettings: {
+              name: 'loginForm',
+              colon: 'true',
+              preserve: 'true',
+              layout: 'horizontal',
+              labelAlign: 'right',
+              labelCol: 4,
+              wrapperCol: 20,
+            },
+            composes: [
+              {
+                label: '标题',
+                name: 'TextInput',
+                props: {
+                  label: '文章标题',
+                  name: 'title',
+                  value: 'H5表单编辑器',
+                  placeholder: '请输入',
+                },
+              },
+              {
+                label: '作者',
+                name: 'TextInput',
+                props: {
+                  label: '文章作者',
+                  name: 'author',
+                  value: '朴朴',
+                  placeholder: '请输入',
+                },
+              },
+              {
+                label: '文章内容',
+                name: 'TextArea',
+                props: {
+                  label: '文章内容',
+                  name: 'content',
+                  value: '朴朴',
+                  rows: 10,
+                  placeholder: '请输入',
+                },
+              },
+            ],
+          })}
+        </div>
+
         <H5Editor
           tmplPanelWidth={300}
           attrPanelWidth={300}
@@ -20,159 +76,120 @@ const App: React.FC = () => {
           stageDropColor="#1890ff1c"
           className="blink-border"
           attLabelWrapperCol={[12, 12]}
-          style={{ width: 1500, height: 1000 }}
+          style={{ width: 1200, height: 700 }}
           enableBuildingsFormSettings={true}
           bricks={{
             icon: <SettingOutlined translate="" />,
             loader: (name: string) => () => import(`./Bricks/${name}`),
             getComponents: () => [
               {
-                label: "测试异常组件",
-                name: "DataSourceSelectXXX",
+                label: '测试异常组件',
+                name: 'DataSourceSelectXXX',
+              },
+              {
+                label: '数据源',
+                name: 'DataSourceSelect',
                 // 不用提供props属性，会自动读取基础组件里面的props属性，
                 // 而且只会设置有提供值的，没有值的会用基础组件里面的默认值代替
               },
               {
-                label: "数据源",
-                name: "DataSourceSelect",
-                // 不用提供props属性，会自动读取基础组件里面的props属性，
-                // 而且只会设置有提供值的，没有值的会用基础组件里面的默认值代替
+                label: '输入框',
+                name: 'TextInput',
               },
               {
-                label: "备注",
-                name: "RemarkTextArea",
+                label: '密码框',
+                name: 'PasswordInput',
+              },
+              {
+                label: '文本域',
+                name: 'TextArea',
                 // 可以不用设置props属性，如果你想去覆盖的话，可以设置
                 props: {
-                  label: "备注信息",
-                  name: "remark",
+                  label: '文本信息',
+                  name: 'remark',
                   rows: 3,
-                  placeholder: "请输入",
+                  placeholder: '请输入',
                 },
-              },
-              {
-                label: "标题",
-                name: "TitleInput",
               },
             ],
           }}
           buildings={[
             {
               icon: <AppstoreOutlined translate="" />,
-              title: "模板组件",
+              title: '模板组件',
               getComponents: () => [
                 {
-                  label: "用户登录",
+                  label: '文章模板',
                   formSettings: {
-                    name: "loginForm",
-                    colon: "true",
-                    preserve: "true",
-                    layout: "horizontal",
-                    labelAlign: "right",
+                    name: 'loginForm',
+                    colon: 'true',
+                    preserve: 'true',
+                    layout: 'horizontal',
+                    labelAlign: 'right',
                     labelCol: 12,
                     wrapperCol: 12,
                   },
                   composes: [
                     {
-                      label: "标题",
-                      name: "TitleInput",
+                      label: '标题',
+                      name: 'TextInput',
                       props: {
-                        label: "用户名",
-                        name: "username",
-                        placeholder: "请输入",
+                        label: '文章标题',
+                        name: 'title',
+                        value: 'H5表单编辑器',
+                        placeholder: '请输入',
                       },
                     },
                     {
-                      label: "标题",
-                      name: "TitleInput",
+                      label: '作者',
+                      name: 'TextInput',
                       props: {
-                        label: "密码",
-                        name: "password",
-                        placeholder: "再输入",
+                        label: '文章作者',
+                        name: 'author',
+                        value: '朴朴',
+                        placeholder: '请输入',
+                      },
+                    },
+                    {
+                      label: '文章内容',
+                      name: 'TextArea',
+                      props: {
+                        label: '文章内容',
+                        name: 'content',
+                        value: '朴朴',
+                        placeholder: '请输入',
                       },
                     },
                   ],
                 },
                 {
-                  label: "确认密码",
+                  label: '用户登录模板',
                   formSettings: {
-                    name: "passwordForm",
-                    colon: "false",
-                    preserve: "false",
-                    layout: "horizontal",
-                    labelAlign: "left",
+                    name: 'loginForm',
+                    colon: 'false',
+                    preserve: 'false',
+                    layout: 'horizontal',
+                    labelAlign: 'left',
                     labelCol: 4,
                     wrapperCol: 20,
                   },
                   composes: [
                     {
-                      label: "标题",
-                      name: "TitleInput",
+                      label: '输入框',
+                      name: 'TextInput',
                       props: {
-                        label: "输入密码",
-                        name: "password1",
-                        placeholder: "请输入",
+                        label: '输入用户名',
+                        name: 'username',
+                        placeholder: '请输入',
                       },
                     },
                     {
-                      label: "标题",
-                      name: "TitleInput",
+                      label: '密码框',
+                      name: 'PasswordInput',
                       props: {
-                        label: "确认密码",
-                        name: "password2",
-                        placeholder: "再次输入",
-                      },
-                    },
-                  ],
-                },
-              ],
-              updateComponents: () => {},
-            },
-            {
-              icon: <PieChartOutlined translate="" />,
-              title: "业务组件",
-              getComponents: () => [
-                {
-                  label: "用户登录_业务",
-                  composes: [
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "用户名",
-                        name: "username_yewu",
-                        placeholder: "请输入",
-                      },
-                    },
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "密码",
-                        name: "password_yewu",
-                        placeholder: "再输入",
-                      },
-                    },
-                  ],
-                },
-                {
-                  label: "确认密码_业务",
-                  composes: [
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "输入密码",
-                        name: "password1_yewu",
-                        placeholder: "请输入",
-                      },
-                    },
-                    {
-                      label: "标题",
-                      name: "TitleInput",
-                      props: {
-                        label: "确认密码",
-                        name: "password2_yewu",
-                        placeholder: "再次输入",
+                        label: '请输入密码',
+                        name: 'password',
+                        placeholder: '再次输入',
                       },
                     },
                   ],
@@ -184,7 +201,7 @@ const App: React.FC = () => {
         />
       </header>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

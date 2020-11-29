@@ -1,5 +1,5 @@
-import { nanoid } from "nanoid";
-import { ComponentType } from "./constants";
+import { nanoid } from 'nanoid'
+import { ComponentType } from './constants'
 import {
   StageItem,
   BrickTemplate,
@@ -7,7 +7,7 @@ import {
   BuildingTemplateGroupList,
   UniformTmplGroupList,
   FormSettingsProps,
-} from "./types";
+} from './types'
 
 /**
  * 获取统一的模板数据结构
@@ -16,13 +16,13 @@ import {
  */
 export function getUniformTmplGroupList(
   bricks: BrickTemplate,
-  buildings: BuildingTemplateGroupList
+  buildings: BuildingTemplateGroupList,
 ): UniformTmplGroupList {
   return [
     // 基础组件分组信息
     {
       icon: bricks.icon,
-      title: "基础组件",
+      title: '基础组件',
       loader: bricks.loader,
       // [ { id, type: "Bricks", label, name, props } ]
       components:
@@ -48,21 +48,21 @@ export function getUniformTmplGroupList(
           }))) ||
         [],
     })),
-  ];
+  ]
 }
 
-export function convertFormSettings(settings: FormSettingsProps) {
+export function convertFormSettings(settings: FormSettingsProps = {}) {
   return {
     ...settings,
-    colon: settings.colon && settings.colon === "true" ? true : false,
-    preserve: settings.preserve && settings.preserve === "true" ? true : false,
+    colon: settings.colon && settings.colon === 'true' ? true : false,
+    preserve: settings.preserve && settings.preserve === 'true' ? true : false,
     labelCol: {
       span: settings.labelCol ? Number(settings.labelCol) : 6,
     },
     wrapperCol: {
       span: settings.wrapperCol ? Number(settings.wrapperCol) : 18,
     },
-  };
+  }
 }
 
 // TODO:解析表单的初始值
