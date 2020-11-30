@@ -7,8 +7,8 @@ import update from "immutability-helper";
 import { EditorContext } from "../index";
 import SortableItem from "./SortableItem";
 import DynamicEngine from "../DynamicEngine";
-import { convertFormSettings } from "../helper";
-import { BuildingComponent, Loader } from "../types";
+import { convertFormSettings, resolveFormInitialValues } from "../helper";
+import { BuildingComponent, Loader, StageItem } from "../types";
 import { nanoid } from "nanoid";
 
 function renderFormItem(loader: Loader, item: any) {
@@ -36,7 +36,10 @@ export function renderForm(loader: Loader, config: BuildingComponent) {
     type: ComponentType.Bricks,
   }));
   return (
-    <Form {...convertFormSettings(formSettings)}>
+    <Form
+      {...convertFormSettings(formSettings)}
+      initialValues={resolveFormInitialValues(config.composes as StageItem[])}
+    >
       {formItemList.map((item) => renderFormItem(loader, item))}
     </Form>
   );

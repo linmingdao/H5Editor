@@ -293,7 +293,7 @@ const App: React.FC = () => {
               {
                 label: "数据源",
                 name: "DataSourceSelect",
-                props: { value: "source1", name: "JEVkslxDwlmC0IzNlSG0q" },
+                props: { value: "source2", name: "JEVkslxDwlmC0IzNlSG0q" },
                 id: "P1g_mf5aFg5o1Vzp9L4Nh",
                 type: "bricks",
               },
