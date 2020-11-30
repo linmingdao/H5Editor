@@ -1,5 +1,5 @@
-import { nanoid } from "nanoid";
-import { ComponentType } from "./constants";
+import { nanoid } from 'nanoid'
+import { ComponentType } from './constants'
 import {
   StageItem,
   BrickTemplate,
@@ -7,7 +7,7 @@ import {
   BuildingTemplateGroupList,
   UniformTmplGroupList,
   FormSettingsProps,
-} from "./types";
+} from './types'
 
 /**
  * 获取统一的模板数据结构
@@ -16,13 +16,13 @@ import {
  */
 export function getUniformTmplGroupList(
   bricks: BrickTemplate,
-  buildings: BuildingTemplateGroupList
+  buildings: BuildingTemplateGroupList,
 ): UniformTmplGroupList {
   return [
     // 基础组件分组信息
     {
       icon: bricks.icon,
-      title: "基础组件",
+      title: '基础组件',
       loader: bricks.loader,
       // [ { id, type: "Bricks", label, name, props } ]
       components:
@@ -49,33 +49,56 @@ export function getUniformTmplGroupList(
           }))) ||
         [],
     })),
-  ];
+  ]
 }
+
+export async function requestComponents(
+  bricks: BrickTemplate,
+  buildings: BuildingTemplateGroupList,
+) {
+  const dfds: any = [bricks.getComponents()]
+  buildings.forEach((item: BuildingTemplateGroup) =>
+    dfds.push(item.getComponents()),
+  )
+  const res = await Promise.all(dfds)
+  bricks.components = res[0] as any[]
+  buildings = buildings.map((item, index) => {
+    return {
+      ...item,
+      components: res[index + 1] as any[],
+    }
+  })
+  return getUniformTmplGroupList(bricks, buildings)
+}
+
+// export function updateBuildingsComponents(buildings: BuildingTemplateGroupList, index) {
+//   const a = buildings[index];
+// }
 
 export function convertFormSettings(settings: FormSettingsProps = {}) {
   return {
     ...settings,
-    colon: settings.colon && settings.colon === "true" ? true : false,
-    preserve: settings.preserve && settings.preserve === "true" ? true : false,
+    colon: settings.colon && settings.colon === 'true' ? true : false,
+    preserve: settings.preserve && settings.preserve === 'true' ? true : false,
     labelCol: {
       span: settings.labelCol ? Number(settings.labelCol) : 6,
     },
     wrapperCol: {
       span: settings.wrapperCol ? Number(settings.wrapperCol) : 18,
     },
-  };
+  }
 }
 
 // 解析表单的初始值
 export function resolveFormInitialValues(stageItemList: StageItem[]) {
-  const initialValues: any = {};
+  const initialValues: any = {}
   stageItemList.forEach((item) => {
-    const { value, name } = item.props;
-    if (typeof value !== "undefined") {
-      initialValues[name] = value;
+    const { value, name } = item.props
+    if (typeof value !== 'undefined') {
+      initialValues[name] = value
     }
-  });
-  return initialValues;
+  })
+  return initialValues
 }
 
 // TODO:检查 name 的唯一性
