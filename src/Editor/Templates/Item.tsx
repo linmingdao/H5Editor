@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { useContext } from "react";
 import { useDrag, DragSourceMonitor } from "react-dnd";
 import { EditorContext } from "../index";
@@ -26,7 +27,14 @@ const Item: React.FC<ItemProps> = (props) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
         handleDrop &&
-          handleDrop({ ...JSON.parse(JSON.stringify(item.config)) });
+          handleDrop({
+            ...JSON.parse(
+              JSON.stringify({
+                ...item.config,
+                props: { ...item.config.props, name: nanoid() },
+              })
+            ),
+          });
       }
     },
     collect: (monitor) => ({

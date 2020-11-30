@@ -100,6 +100,7 @@ export interface H5EditorContext {
   attLabelWrapperCol?: [number, number];
   emptyImageType: React.ReactNode;
   formSettings: FormSettingsProps;
+  formInitialValues: ObjProps;
   uniformTmplGroupList: UniformTmplGroupList;
   stageItemList: StageItem[];
   collapse: boolean;
@@ -110,6 +111,7 @@ export interface H5EditorContext {
     changedValues: any,
     allValues?: any
   ) => void;
+  // handleInitialValuesChange?: (changedValues: any, allValues?: any) => void;
   handleFormSettingsChange?: (changedValues: any, allValues?: any) => void;
   handleDrop?: (item: any) => void;
   handleClear?: NoSelectedCallback;

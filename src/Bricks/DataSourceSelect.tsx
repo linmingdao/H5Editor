@@ -25,22 +25,23 @@ function Stage(props: PropsType) {
         style={{ width: "100%", textAlign: "left" }}
         placeholder={placeholder}
       >
-        <Option value="source1">source 1</Option>
-        <Option value="source2">source 2</Option>
-        <Option value="source3">source 3</Option>
+        <Option value="source1">source1</Option>
+        <Option value="source2">source2</Option>
+        <Option value="source3">source3</Option>
       </Select>
     </Form.Item>
   );
 }
 
 function Attr(props: PropsType) {
-  const { name, label, placeholder, onValuesChange } = props;
+  const { name, value, label, placeholder, onValuesChange } = props;
   return (
     <Form
-      {...{ labelCol: { span: 12 }, wrapperCol: { span: 12 } }}
+      {...{ labelCol: { span: 7 }, wrapperCol: { span: 17 } }}
       labelAlign="left"
       initialValues={{
         name,
+        value,
         label,
         placeholder,
       }}
@@ -49,11 +50,21 @@ function Attr(props: PropsType) {
       <Form.Item label="name" name="name">
         <Input placeholder="请输入" allowClear />
       </Form.Item>
+      <Form.Item label="默认值" name="value">
+        <Select
+          style={{ width: "100%", textAlign: "left" }}
+          placeholder="请选择"
+        >
+          <Option value="source1">source1</Option>
+          <Option value="source2">source2</Option>
+          <Option value="source3">source3</Option>
+        </Select>
+      </Form.Item>
       <Form.Item label="label" name="label">
-        <Input placeholder="请输入" />
+        <Input placeholder="请输入" allowClear />
       </Form.Item>
       <Form.Item label="placeholder" name="placeholder">
-        <Input placeholder="请输入" />
+        <Input placeholder="请输入" allowClear />
       </Form.Item>
     </Form>
   );
@@ -71,8 +82,6 @@ const MysqlDataSourceSelect: React.FC<PropsType> = (props) => {
 };
 
 MysqlDataSourceSelect.defaultProps = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
   value: "source2",
   label: "数据源",
   name: "source",

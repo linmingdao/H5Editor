@@ -1,21 +1,21 @@
-import React, { CSSProperties, useContext } from 'react'
-import { Empty } from 'antd'
-import FormSettings from './FormSettings'
-import { Mode } from '../constants'
-import classnames from 'classnames'
-import { EditorContext } from '../index'
-import DynamicEngine from '../DynamicEngine'
+import React, { CSSProperties, useContext } from "react";
+import { Empty } from "antd";
+import FormSettings from "./FormSettings";
+import { Mode } from "../constants";
+import classnames from "classnames";
+import { EditorContext } from "../index";
+import DynamicEngine from "../DynamicEngine";
 
 interface IAttributes {
-  collapse: boolean
-  className?: string
-  style?: CSSProperties
+  collapse: boolean;
+  className?: string;
+  style?: CSSProperties;
 }
 
 const Attributes: React.FC<IAttributes> = (props) => {
-  const className = classnames('attributes', {
+  const className = classnames("attributes uniform-scrollbar", {
     collapse: !props.collapse,
-  })
+  });
   const {
     formSettings,
     attrPanelWidth,
@@ -23,7 +23,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
     selectedStageItemIndex,
     handleStageItemPropsChange,
     emptyImageType,
-  } = useContext(EditorContext)
+  } = useContext(EditorContext);
 
   function renderAttr() {
     function handleValuesChange(changedValues: any, allValues: any) {
@@ -31,11 +31,11 @@ const Attributes: React.FC<IAttributes> = (props) => {
         handleStageItemPropsChange(
           selectedStageItemIndex,
           changedValues,
-          allValues,
-        )
+          allValues
+        );
     }
 
-    const config = stageItemList[selectedStageItemIndex]
+    const config = stageItemList[selectedStageItemIndex];
     return config ? (
       <div>
         <DynamicEngine
@@ -48,7 +48,7 @@ const Attributes: React.FC<IAttributes> = (props) => {
       </div>
     ) : (
       <Empty image={emptyImageType} description="还未选中任何控件哟~" />
-    )
+    );
   }
 
   return (
@@ -63,9 +63,9 @@ const Attributes: React.FC<IAttributes> = (props) => {
         <FormSettings {...formSettings} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-Attributes.displayName = 'Attributes'
+Attributes.displayName = "Attributes";
 
-export default Attributes
+export default Attributes;

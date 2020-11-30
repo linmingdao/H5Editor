@@ -1,31 +1,31 @@
-import React from 'react'
-import { Select, Form, Input } from 'antd'
+import React from "react";
+import { Select, Form, Input } from "antd";
 
-const { Option } = Select
+const { Option } = Select;
 
 interface ColSpan {
-  span: number
+  span: number;
 }
 
 interface PropsType {
-  labelCol: ColSpan
-  wrapperCol: ColSpan
-  value?: string
-  name?: string
-  label?: string
-  placeholder?: string
-  backgroundColor?: string
-  mode?: string // output, stage, attr
-  onValuesChange: (changedValues: any, allValues: any) => void
+  labelCol: ColSpan;
+  wrapperCol: ColSpan;
+  value?: string;
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  backgroundColor?: string;
+  mode?: string; // output, stage, attr
+  onValuesChange: (changedValues: any, allValues: any) => void;
 }
 
 function Stage(props: PropsType) {
-  const { label, name, placeholder, backgroundColor } = props
+  const { label, name, placeholder, backgroundColor } = props;
   return (
     <Form.Item label={label} name={name}>
       <Input.Password style={{ backgroundColor }} placeholder={placeholder} />
     </Form.Item>
-  )
+  );
 }
 
 function Attr(props: PropsType) {
@@ -36,10 +36,10 @@ function Attr(props: PropsType) {
     placeholder,
     backgroundColor,
     onValuesChange,
-  } = props
+  } = props;
   return (
     <Form
-      {...{ labelCol: { span: 12 }, wrapperCol: { span: 12 } }}
+      {...{ labelCol: { span: 7 }, wrapperCol: { span: 17 } }}
       labelAlign="left"
       initialValues={{
         label,
@@ -64,7 +64,7 @@ function Attr(props: PropsType) {
       </Form.Item>
       <Form.Item label="背景色" name="backgroundColor">
         <Select
-          style={{ width: '100%', textAlign: 'left' }}
+          style={{ width: "100%", textAlign: "left" }}
           placeholder="请选择背景色"
           allowClear
         >
@@ -75,29 +75,27 @@ function Attr(props: PropsType) {
         </Select>
       </Form.Item>
     </Form>
-  )
+  );
 }
 
 const TextInput: React.FC<PropsType> = (props) => {
   switch (props.mode) {
-    case 'stage':
-      return Stage(props)
-    case 'attr':
-      return Attr(props)
+    case "stage":
+      return Stage(props);
+    case "attr":
+      return Attr(props);
     default:
-      return Stage(props)
+      return Stage(props);
   }
-}
+};
 
 TextInput.defaultProps = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-  value: '基于 Ant Design 的表单编辑器',
-  name: 'title',
-  label: '标题',
-  backgroundColor: '#fff',
-  placeholder: '请输入',
-  mode: 'stage',
-}
+  value: "基于 Ant Design 的表单编辑器",
+  name: "title",
+  label: "标题",
+  backgroundColor: "#fff",
+  placeholder: "请输入",
+  mode: "stage",
+};
 
-export default TextInput
+export default TextInput;

@@ -12,7 +12,7 @@ const FormGlobalSettings: React.FC<FormSettingsProps> = (props) => {
     attLabelWrapperCol = [12, 12],
   } = useContext(EditorContext);
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <Form

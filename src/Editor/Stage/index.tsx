@@ -1,44 +1,45 @@
-import React, { useContext, useCallback, FC, useMemo } from 'react'
-import classnames from 'classnames'
-import { Mode, ComponentType } from '../constants'
-import { Form, Empty } from 'antd'
-import { useDrop } from 'react-dnd'
-import update from 'immutability-helper'
-import { EditorContext } from '../index'
-import SortableItem from './SortableItem'
-import DynamicEngine from '../DynamicEngine'
-import { convertFormSettings } from '../helper'
-import { BuildingComponent, Loader, BrickComponent } from '../types'
-import { nanoid } from 'nanoid'
+import React, { useContext, useCallback, useEffect } from "react";
+import classnames from "classnames";
+import { Mode, ComponentType } from "../constants";
+import { Form, Empty } from "antd";
+import { useDrop } from "react-dnd";
+import update from "immutability-helper";
+import { EditorContext } from "../index";
+import SortableItem from "./SortableItem";
+import DynamicEngine from "../DynamicEngine";
+import { convertFormSettings } from "../helper";
+import { BuildingComponent, Loader } from "../types";
+import { nanoid } from "nanoid";
 
-function renderFormItem(loader: Loader, item: BrickComponent) {
+function renderFormItem(loader: Loader, item: any) {
   const props = {
     ...item.props,
-    mode: 'stage',
-  }
+    mode: "stage",
+  };
   return (
     <DynamicEngine
+      key={item.id}
       mode="stage"
       loader={loader}
       componentName={item.name}
       componentProps={props}
       onValuesChange={() => {}}
     />
-  )
+  );
 }
 
 export function renderForm(loader: Loader, config: BuildingComponent) {
-  const { formSettings, composes } = config
+  const { formSettings, composes } = config;
   const formItemList = composes.map((item: any) => ({
     ...item,
     id: nanoid(),
     type: ComponentType.Bricks,
-  }))
+  }));
   return (
     <Form {...convertFormSettings(formSettings)}>
       {formItemList.map((item) => renderFormItem(loader, item))}
     </Form>
-  )
+  );
 }
 
 const Stage: React.FC = () => {
@@ -47,44 +48,46 @@ const Stage: React.FC = () => {
     stageActiveColor,
     stageDropColor,
     formSettings,
+    formInitialValues,
     stageItemList,
     emptyImageType,
     handleSort,
     handleSelect,
     handleStageItemPropsChange,
-  } = useContext(EditorContext)
+    // handleInitialValuesChange,
+  } = useContext(EditorContext);
 
-  const isNotEmpty = stageItemList && stageItemList.length
-  const classes = classnames('stage', 'uniform-scrollbar', {
-    'empty-list': !isNotEmpty,
-  })
+  const isNotEmpty = stageItemList && stageItemList.length;
+  const classes = classnames("stage", "uniform-scrollbar", {
+    "empty-list": !isNotEmpty,
+  });
 
   const [{ canDrop, isOver }, drop] = useDrop({
-    accept: 'TemplateItem',
-    drop: () => ({ name: 'LayoutEditor' }),
+    accept: "TemplateItem",
+    drop: () => ({ name: "LayoutEditor" }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
-  })
+  });
 
   // 高亮提示 开始拖拽 以及 可以完成拖拽放置
-  const isActive = canDrop && isOver
-  let backgroundColor = stageBgColor ? stageBgColor : '#f3f2f2a3'
-  const $collaOutline: any = document.querySelector('.colla-outline')
-  $collaOutline && ($collaOutline.style['backgroundColor'] = backgroundColor)
+  const isActive = canDrop && isOver;
+  let backgroundColor = stageBgColor ? stageBgColor : "#f3f2f2a3";
+  const $collaOutline: any = document.querySelector(".colla-outline");
+  $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   if (isActive) {
-    backgroundColor = stageActiveColor ? stageActiveColor : '#1890ff2b'
-    $collaOutline && ($collaOutline.style['backgroundColor'] = backgroundColor)
+    backgroundColor = stageActiveColor ? stageActiveColor : "#1890ff2b";
+    $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   } else if (canDrop) {
-    backgroundColor = stageDropColor ? stageDropColor : '#1890ff1c'
-    $collaOutline && ($collaOutline.style['backgroundColor'] = backgroundColor)
+    backgroundColor = stageDropColor ? stageDropColor : "#1890ff1c";
+    $collaOutline && ($collaOutline.style["backgroundColor"] = backgroundColor);
   }
 
   // 排序
   const moveFormItem = useCallback(
     (dragIndex: number, hoverIndex: number) => {
-      const dragItem = stageItemList[dragIndex]
+      const dragItem = stageItemList[dragIndex];
       handleSort &&
         handleSort(
           update(stageItemList, {
@@ -92,16 +95,16 @@ const Stage: React.FC = () => {
               [dragIndex, 1],
               [hoverIndex, 0, dragItem],
             ],
-          }),
-        )
+          })
+        );
     },
-    [stageItemList, handleSort],
-  )
+    [stageItemList, handleSort]
+  );
 
   function renderItem(item: any, index: number) {
     function handleValuesChange(changedValues: any, allValues: any) {
       handleStageItemPropsChange &&
-        handleStageItemPropsChange(index, changedValues, allValues)
+        handleStageItemPropsChange(index, changedValues, allValues);
     }
     return (
       <SortableItem
@@ -118,13 +121,20 @@ const Stage: React.FC = () => {
           onValuesChange={handleValuesChange}
         />
       </SortableItem>
-    )
+    );
   }
+
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({ ...formInitialValues });
+  });
 
   return (
     <div ref={drop} className={classes} style={{ backgroundColor }}>
       {isNotEmpty ? (
-        <Form {...convertFormSettings(formSettings)}>
+        // onValuesChange={handleInitialValuesChange}
+        <Form form={form} {...convertFormSettings(formSettings)}>
           {stageItemList.map((item, index) => renderItem(item, index))}
         </Form>
       ) : (
@@ -134,9 +144,9 @@ const Stage: React.FC = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-Stage.displayName = 'Stage'
+Stage.displayName = "Stage";
 
-export default Stage
+export default Stage;
