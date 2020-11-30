@@ -55,7 +55,7 @@ const SortableItem: React.FC<ISortableItemProps> = (props) => {
 
   function handleRemoveStageItem(e: React.MouseEvent) {
     e.stopPropagation();
-    handleRemove && handleRemove(id);
+    handleRemove && handleRemove(id, index);
   }
 
   return (

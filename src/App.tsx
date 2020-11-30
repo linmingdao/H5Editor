@@ -19,8 +19,8 @@ const App: React.FC = () => {
           stageActiveColor="#1890ff2b"
           stageDropColor="#1890ff1c"
           className="blink-border"
-          attLabelWrapperCol={[12, 12]}
-          style={{ width: 1300, height: 1000 }}
+          attLabelWrapperCol={[7, 17]}
+          style={{ width: 1200, height: 700 }}
           enableBuildingsFormSettings={true}
           bricks={{
             icon: <SettingOutlined translate="" />,
@@ -38,6 +38,9 @@ const App: React.FC = () => {
                 name: "DataSourceSelect",
                 // 不用提供props属性，会自动读取基础组件里面的props属性，
                 // 而且只会设置有提供值的，没有值的会用基础组件里面的默认值代替
+                props: {
+                  value: "source1",
+                },
               },
               {
                 label: "输入框",
@@ -79,8 +82,8 @@ const App: React.FC = () => {
                     preserve: "true",
                     layout: "horizontal",
                     labelAlign: "right",
-                    labelCol: 12,
-                    wrapperCol: 12,
+                    labelCol: 6,
+                    wrapperCol: 18,
                   },
                   composes: [
                     {
@@ -123,8 +126,8 @@ const App: React.FC = () => {
                     preserve: "false",
                     layout: "horizontal",
                     labelAlign: "left",
-                    labelCol: 4,
-                    wrapperCol: 20,
+                    labelCol: 12,
+                    wrapperCol: 12,
                   },
                   composes: [
                     {
@@ -148,7 +151,12 @@ const App: React.FC = () => {
                   ],
                 },
               ],
-              updateComponents: () => {},
+              updateComponents: (composes: any, formSettings: any) => {
+                console.log("模板组件");
+                console.log(
+                  JSON.stringify({ label: "文章模板", formSettings, composes })
+                );
+              },
             },
             {
               icon: <PieChartOutlined translate="" />,
@@ -231,61 +239,70 @@ const App: React.FC = () => {
                   ],
                 },
               ],
-              updateComponents: () => {},
+              updateComponents: (composes: any, formSettings: any) => {
+                console.log("业务组件");
+                console.log({ label: "文章模板", formSettings, composes });
+              },
             },
           ]}
         />
 
         <div
           style={{
-            width: 1300,
+            width: 1200,
             backgroundColor: "#fff",
-            padding: 50,
-            marginTop: 50,
+            padding: 40,
+            marginTop: 30,
           }}
         >
           {renderForm((name: string) => () => import(`./Bricks/${name}`), {
             label: "文章模板",
             formSettings: {
-              name: "loginForm",
-              colon: "true",
+              name: "4A9-SpMprc7uFj5K44Xmu",
+              colon: "false",
               preserve: "true",
-              layout: "horizontal",
+              layout: "vertical",
               labelAlign: "right",
-              labelCol: 4,
-              wrapperCol: 20,
+              labelCol: 6,
+              wrapperCol: "24",
             },
             composes: [
               {
-                label: "标题",
+                label: "输入框",
                 name: "TextInput",
                 props: {
-                  label: "文章标题",
-                  name: "title",
-                  value: "H5表单编辑器",
-                  placeholder: "请输入",
+                  value: "我是输入框的默认值",
+                  name: "lGFo_a1drhQc8ND6zAkIz",
                 },
+                id: "Q8YOJMpDNgGNZrB0juY26",
+                type: "bricks",
               },
               {
-                label: "作者",
-                name: "TextInput",
-                props: {
-                  label: "文章作者",
-                  name: "author",
-                  value: "朴朴",
-                  placeholder: "请输入",
-                },
-              },
-              {
-                label: "文章内容",
+                label: "文本域",
                 name: "TextArea",
                 props: {
-                  label: "文章内容",
-                  name: "content",
-                  value: "朴朴",
-                  rows: 10,
+                  label: "文本信息",
+                  value: "我是文本域的默认值",
+                  rows: 3,
                   placeholder: "请输入",
+                  name: "Hv6tT7NE2W1hdfSiXUJe0",
                 },
+                id: "U-de_FZxLjI42e9YTQzDr",
+                type: "bricks",
+              },
+              {
+                label: "数据源",
+                name: "DataSourceSelect",
+                props: { value: "source1", name: "JEVkslxDwlmC0IzNlSG0q" },
+                id: "P1g_mf5aFg5o1Vzp9L4Nh",
+                type: "bricks",
+              },
+              {
+                label: "密码框",
+                name: "PasswordInput",
+                props: { value: "123456", name: "22QFwksx--O4jItKMyI9x" },
+                id: "Gx0rmbPLCiwfgDD8-DyAD",
+                type: "bricks",
               },
             ],
           })}

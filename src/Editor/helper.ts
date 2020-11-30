@@ -38,6 +38,7 @@ export function getUniformTmplGroupList(
     ...buildings.map((item: BuildingTemplateGroup) => ({
       icon: item.icon,
       title: item.title,
+      updateComponents: item.updateComponents,
       // [ { id, type: "Buildings", label, composes } ]
       components:
         (item.getComponents &&
@@ -65,9 +66,8 @@ export function convertFormSettings(settings: FormSettingsProps = {}) {
   };
 }
 
-// TODO:解析表单的初始值
+// 解析表单的初始值
 export function resolveFormInitialValues(stageItemList: StageItem[]) {
-  // console.log(stageItemList);
   const initialValues: any = {};
   stageItemList.forEach((item) => {
     const { value, name } = item.props;

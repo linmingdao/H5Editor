@@ -13,7 +13,7 @@ export enum Mode {
 }
 
 export const defaultFormSettings: FormSettingsProps = {
-  name: `name_${nanoid()}`,
+  name: nanoid(),
   colon: "true",
   preserve: "true",
   layout: "horizontal",

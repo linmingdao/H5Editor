@@ -54,10 +54,14 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     setStageItemList((preList) => {
       const newList = needMerge ? [...preList, ...list] : list;
       const initialValues = resolveFormInitialValues(newList);
-      console.log(initialValues);
       setFormInitialValues(initialValues);
       return newList;
     });
+  }
+
+  function updateStageFormSettings(settings: any, needMerge: boolean = true) {
+    const newSettings = needMerge ? { ...formSettings, ...settings } : settings;
+    setFormSettings(newSettings);
   }
 
   const passedContext: H5EditorContext = {
@@ -75,7 +79,11 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     collapse,
     setCollapse,
     selectedStageItemIndex,
-    handleStageItemPropsChange(selectedIndex: number, changedValues: any) {
+    handleStageItemPropsChange(
+      selectedIndex: number,
+      changedValues: any,
+      allValues: any
+    ) {
       updateStageItemList(
         stageItemList.map((item, index) => {
           if (index === selectedIndex) {
@@ -83,7 +91,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
               ...item,
               props: {
                 ...item["props"],
-                ...changedValues,
+                ...allValues,
               },
             };
           } else {
@@ -110,10 +118,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
     //   );
     // },
     handleFormSettingsChange(changedValues: any) {
-      setFormSettings({
-        ...formSettings,
-        ...changedValues,
-      });
+      updateStageFormSettings(changedValues);
     },
     handleSelect(selectedIndex: number) {
       setSelectedStageItemIndex(selectedIndex);
@@ -129,10 +134,10 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       } else {
         enableBuildingsFormSettings &&
           item.formSettings &&
-          setFormSettings({ ...formSettings, ...item.formSettings });
-        const composes = item.composes;
+          updateStageFormSettings(item.formSettings);
+
         updateStageItemList(
-          composes.map((item: any) => ({
+          item.composes.map((item: any) => ({
             ...item,
             id: nanoid(),
             type: ComponentType.Bricks,
@@ -145,6 +150,7 @@ const H5Editor: React.FC<H5EditorProps> = (props) => {
       updateStageItemList([]);
     },
     handleRemove(id) {
+      setSelectedStageItemIndex(-1);
       updateStageItemList(stageItemList.filter((item) => item.id !== id));
     },
   };

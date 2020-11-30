@@ -7,22 +7,17 @@ import { EditorContext } from "../index";
 const { Option } = Select;
 
 const FormGlobalSettings: React.FC<FormSettingsProps> = (props) => {
-  const {
-    handleFormSettingsChange,
-    attLabelWrapperCol = [12, 12],
-  } = useContext(EditorContext);
-
-  // console.log(props);
+  const { handleFormSettingsChange, attLabelWrapperCol = [7, 17] } = useContext(
+    EditorContext
+  );
 
   return (
     <Form
-      {...{
-        labelCol: { span: attLabelWrapperCol[0] },
-        wrapperCol: { span: attLabelWrapperCol[1] },
-      }}
       labelAlign="left"
       initialValues={props}
       onValuesChange={handleFormSettingsChange}
+      labelCol={{ span: attLabelWrapperCol[0] }}
+      wrapperCol={{ span: attLabelWrapperCol[1] }}
     >
       <Form.Item label="name" name="name">
         <Input placeholder="请输入" />

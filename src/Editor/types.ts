@@ -10,6 +10,8 @@ export interface ObjProps {
 // 传入 H5Editor 的 props 结构定义
 
 export interface BrickComponent {
+  type?: string;
+  id?: string;
   label: string;
   name: string;
   loader?: Loader;
@@ -19,20 +21,23 @@ export interface BrickComponent {
 export interface BrickTemplate {
   icon?: React.ReactNode;
   loader: Loader;
-  getComponents?: () => BrickComponent[];
+  components?: any[];
+  getComponents: () => BrickComponent[];
 }
 
 export interface BuildingComponent {
   label: string;
   formSettings?: ObjProps;
   composes: BrickComponent[];
+  updateComponents?: (config: any) => void;
 }
 
 export interface BuildingTemplateGroup {
   icon?: React.ReactNode;
   title: string;
-  getComponents?: () => BuildingComponent[];
-  updateComponents?: () => void;
+  components?: any[];
+  getComponents: () => BuildingComponent[];
+  updateComponents: (config: any, formSettings: any) => void;
 }
 
 export type BuildingTemplateGroupList = BuildingTemplateGroup[];
@@ -118,11 +123,10 @@ export interface H5EditorContext {
   handleSelect?: SelectedCallback;
   handleSort?: (stageItemList: StageItem[]) => void;
   handleCopy?: SelectedCallback;
-  handleRemove?: (id: string) => void;
+  handleRemove?: (id: string, index: number) => void;
   handleReset?: NoSelectedCallback;
   handleUndo?: NoSelectedCallback;
   handleRedo?: NoSelectedCallback;
-  handleSave?: NoSelectedCallback;
 }
 
 export interface StageItem {
